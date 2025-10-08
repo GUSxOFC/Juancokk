@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kamera Cerdas</title>
+  <style>
+    body {
+      margin: 0;
+      background: #000;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      color: white;
+      font-family: system-ui, sans-serif;
+    }
+    video {
+      width: 90vw;
+      max-width: 480px;
+      border-radius: 12px;
+      transform: scaleX(-1);
+      box-shadow: 0 0 20px rgba(0,0,0,0.6);
+    }
+    #status {
+      position: absolute;
+      top: 30px;
+      font-size: 1.3em;
+      font-weight: bold;
+      background: rgba(0,0,0,0.5);
+      padding: 8px 16px;
+      border-radius: 10px;
+      backdrop-filter: blur(8px);
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <div id="status">⏳ Memuat kamera...</div>
+  <video id="video" autoplay playsinline></video>
+
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.12.0/dist/tf.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/blazeface@0.1.5/dist/blazeface.min.js"></script>
+
+  <script>
+  const video = document.getElementById('video');
+  const statusText = document.getElementById('status');
+
+  async function setupCamera() {
+    const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+    video.srcObject = stream;
+    return new Promise(resolve => {
+      video.onloadedmetadata = () => resolve(video);
+    });
+  }
+
+  async function main() {
+    statusText.textContent = "🔄 Memuat model...";
+    const model = await blazeface.load();
+    statusText.textContent = "✅ Model siap";
+
+    await setupCamera();
+    video.play();
+    statusText.textContent = "📸 Kamera aktif";
+
+    detectLoop(model);
+  }
+
+  // posisi tengah terakhir
+  let lastX = null, lastY = null;
+
+  async function detectLoop(model) {
+    const predictions = await model.estimateFaces(video, false);
+    const centerX = video.videoWidth / 2;
+    const centerY = video.videoHeight / 2;
+
+    if (predictions.length > 0) {
+      const face = predictions[0];
+      const [x1, y1] = face.topLeft;
+      const [x2, y2] = face.bottomRight;
+      const faceCenterX = (x1 + x2) / 2;
+      const faceCenterY = (y1 + y2) / 2;
+
+      let dx = faceCenterX - centerX;
+      let dy = faceCenterY - centerY;
+
+      let direction = "✅ Wajah di tengah";
+
+      const tolerance = 40; // seberapa sensitif
+      if (dx < -tolerance) direction = "👈 Gerak ke kiri";
+      else if (dx > tolerance) direction = "👉 Gerak ke kanan";
+      else if (dy < -tolerance) direction = "👆 Gerak ke atas";
+      else if (dy > tolerance) direction = "👇 Gerak ke bawah";
+
+      statusText.textContent = direction;
+      statusText.style.background = "rgba(0,128,0,0.6)";
+    } else {
+      statusText.textContent = "❌ Tidak Ada Wajah";
+      statusText.style.background = "rgba(128,0,0,0.6)";
+    }
+
+    requestAnimationFrame(() => detectLoop(model));
+  }
+
+  main().catch(err => {
+    console.error(err);
+    statusText.textContent = "❌ Gagal memuat kamera";
+  });
+  </script>
+</body>
+</html>
