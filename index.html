@@ -482,346 +482,295 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // Elements
-            const tabs = document.querySelectorAll('.tab');
-            const tabContents = document.querySelectorAll('.tab-content');
-            const loading = document.getElementById('loading');
-            const resultImage = document.getElementById('resultImage');
-            const textResult = document.getElementById('textResult');
-            const spotifyResult = document.getElementById('spotifyResult');
-            const downloadBtn = document.getElementById('downloadBtn');
-            const shareBtn = document.getElementById('shareBtn');
-            const newGenerateBtn = document.getElementById('newGenerateBtn');
-            const resultButtons = document.getElementById('resultButtons');
-            const notification = document.getElementById('notification');
-            const notificationText = document.getElementById('notificationText');
-            
-            
-            tabs.forEach(tab => {
-                tab.addEventListener('click', function() {
-                    const tabId = this.getAttribute('data-tab');
-                    
-
-                    tabs.forEach(t => t.classList.remove('active'));
-                    this.classList.add('active');
-                    
-                    
-                    tabContents.forEach(content => content.classList.remove('active'));
-                    document.getElementById(`${tabId}-tab`).classList.add('active');
-                    
-
-                    clearResults();
-                });
-            });
-            
-            
-            const generateIphone = document.getElementById('generateIphone');
-            const batteryPercentage = document.getElementById('batteryPercentage');
-            const batteryValue = document.getElementById('batteryValue');
-            
-            batteryPercentage.addEventListener('input', function() {
-                batteryValue.textContent = `${this.value}%`;
-            });
-            
-            generateIphone.addEventListener('click', function() {
-                const message = document.getElementById('messageText').value.trim();
-                
-                if (!message) {
-                    showNotification('Masukkan pesan terlebih dahulu!');
-                    return;
-                }
-                
-                generateIphoneQuote();
-            });
-            
-            
-            const generateTweet = document.getElementById('generateTweet');
-            generateTweet.addEventListener('click', function() {
-                const tweetText = document.getElementById('tweetText').value.trim();
-                
-                if (!tweetText) {
-                    showNotification('Masukkan teks tweet terlebih dahulu!');
-                    return;
-                }
-                
-                generateTweetImage();
-            });
-            
-
-            const generateFb = document.getElementById('generateFb');
-            generateFb.addEventListener('click', function() {
-                const fbText = document.getElementById('fbText').value.trim();
-                
-                if (!fbText) {
-                    showNotification('Masukkan teks terlebih dahulu!');
-                    return;
-                }
-                
-                generateFbComment();
-            });
-            
-            
-            const checkHoki = document.getElementById('checkHoki');
-            checkHoki.addEventListener('click', function() {
-                const phoneNumber = document.getElementById('phoneNumber').value.trim();
-                
-                if (!phoneNumber) {
-                    showNotification('Masukkan nomor telepon terlebih dahulu!');
-                    return;
-                }
-                
-                checkPhoneHoki();
-            });
-            
-           
-            const searchSpotify = document.getElementById('searchSpotify');
-            searchSpotify.addEventListener('click', function() {
-                const query = document.getElementById('spotifyQuery').value.trim();
-                
-                if (!query) {
-                    showNotification('Masukkan kata kunci pencarian terlebih dahulu!');
-                    return;
-                }
-                
-                searchSpotifyTracks();
-            });
-            
-
-            downloadBtn.addEventListener('click', function() {
-                if (resultImage.src) {
-                    const a = document.createElement('a');
-                    a.href = resultImage.src;
-                    a.download = `selax-x7-result-${Date.now()}.jpg`;
-                    document.body.appendChild(a);
-                    a.click();
-                    document.body.removeChild(a);
-                    showNotification('Gambar berhasil diunduh!');
-                }
-            });
-            
-
-            newGenerateBtn.addEventListener('click', function() {
-                clearResults();
-            });
-            
-            
-            async function generateIphoneQuote() {
-                loading.style.display = 'block';
-                clearResults();
-                
-                try {
-                    const time = document.getElementById('timeValue').value;
-                    const message = document.getElementById('messageText').value;
-                    const carrier = document.getElementById('carrierName').value;
-                    const battery = batteryPercentage.value;
-                    const signal = document.getElementById('signalStrength').value;
-                    
-                    const apiUrl = `https://brat.siputzx.my.id/iphone-quoted?time=${encodeURIComponent(time)}&messageText=${encodeURIComponent(message)}&carrierName=${encodeURIComponent(carrier)}&batteryPercentage=${battery}&signalStrength=${signal}&emojiStyle=apple`;
-                    
-response
-                    resultImage.src = apiUrl;
-
-                    resultImage.onload = function() {
-                        loading.style.display = 'none';
-                        resultImage.style.display = 'block';
-                        resultButtons.style.display = 'block';
-                        showNotification('Quote berhasil dibuat!');
-                    };
-                    
-                    resultImage.onerror = function() {
-                        loading.style.display = 'none';
-                        showNotification('Error memuat gambar. Coba lagi nanti.');
-                    };
-                    
-                } catch (error) {
-                    console.error('Error:', error);
-                    loading.style.display = 'none';
-                    showNotification('Terjadi kesalahan: ' + error.message);
-                }
-            }
-            
-
-            async function generateTweetImage() {
-                loading.style.display = 'block';
-                clearResults();
-                
-                try {
-                    const profile = "https%3A%2F%2Ffiles.catbox.moe%2Fr2oyr8.png";
-                    const name = encodeURIComponent(document.getElementById('profileName').value);
-                    const username = encodeURIComponent(document.getElementById('username').value);
-                    const tweet = encodeURIComponent(document.getElementById('tweetText').value);
-                    const theme = document.getElementById('tweetTheme').value;
-                    const retweets = document.getElementById('retweets').value;
-                    const quotes = document.getElementById('quotes').value;
-                    const likes = document.getElementById('likes').value;
-                    
-                    const apiUrl = `https://api.siputzx.my.id/api/m/tweet?profile=${profile}&name=${name}&username=${username}&tweet=${tweet}&image=null&theme=${theme}&retweets=${retweets}&quotes=${quotes}&likes=${likes}&client=Twitter%20for%20iPhone`;
-                    
-                response
-                    resultImage.src = apiUrl;
-                    
-                  
-                    resultImage.onload = function() {
-                        loading.style.display = 'none';
-                        resultImage.style.display = 'block';
-                        resultButtons.style.display = 'block';
-                        showNotification('Tweet berhasil dibuat!');
-                    };
-                    
-                    resultImage.onerror = function() {
-                        loading.style.display = 'none';
-                        showNotification('Error memuat gambar. Coba lagi nanti.');
-                    };
-                    
-                } catch (error) {
-                    console.error('Error:', error);
-                    loading.style.display = 'none';
-                    showNotification('Terjadi kesalahan: ' + error.message);
-                }
-            }
-            
-
-            async function generateFbComment() {
-                loading.style.display = 'block';
-                clearResults();
-                
-                try {
-                    const fbText = document.getElementById('fbText').value;
-                    const parts = fbText.split(' ');
-                    const name = parts[0];
-                    const comment = parts.slice(1).join(' ');
-                    
-                    const apiUrl = `https://api.sxtream.xyz/maker/fake-chat-fb?name=${encodeURIComponent(name)}&comment=${encodeURIComponent(comment)}&profileUrl=https%3A%2F%2Ffiles.catbox.moe%2Ff7g0nx.jpg`;
-                    
-response                    
-                    resultImage.src = apiUrl;
-                    
-
-                    resultImage.onload = function() {
-                        loading.style.display = 'none';
-                        resultImage.style.display = 'block';
-                        resultButtons.style.display = 'block';
-                        showNotification('FB Comment berhasil dibuat!');
-                    };
-                    
-                    resultImage.onerror = function() {
-                        loading.style.display = 'none';
-                        showNotification('Error memuat gambar. Coba lagi nanti.');
-                    };
-                    
-                } catch (error) {
-                    console.error('Error:', error);
-                    loading.style.display = 'none';
-                    showNotification('Terjadi kesalahan: ' + error.message);
-                }
-            }
-            
-            
-            async function checkPhoneHoki() {
-                loading.style.display = 'block';
-                clearResults();
-                
-                try {
-                    const phoneNumber = document.getElementById('phoneNumber').value;
-                    
-                    const apiUrl = `https://api.siputzx.my.id/api/primbon/nomorhoki?phoneNumber=${encodeURIComponent(phoneNumber)}`;
-                    
-                    const response = await fetch(apiUrl);
-                    const data = await response.json();
-                    
-                    loading.style.display = 'none';
-                    
-                    if (data && data.status) {
-                        textResult.style.display = 'block';
-                        textResult.innerHTML = `
-                            <h4>Hasil Cek Hoki untuk ${phoneNumber}:</h4>
-                            <pre>${JSON.stringify(data, null, 2)}</pre>
-                        `;
-                        resultButtons.style.display = 'block';
-                        showNotification('Cek hoki berhasil!');
-                    } else {
-                        showNotification('Tidak dapat membaca hasil cek hoki.');
-                    }
-                    
-                } catch (error) {
-                    console.error('Error:', error);
-                    loading.style.display = 'none';
-                    showNotification('Terjadi kesalahan: ' + error.message);
-                }
-            }
-            
-
-            async function searchSpotifyTracks() {
-                loading.style.display = 'block';
-                clearResults();
-                
-                try {
-                    const query = document.getElementById('spotifyQuery').value;
-                    
-                    const apiUrl = `https://api.siputzx.my.id/api/s/spotify?query=${encodeURIComponent(query)}`;
-                    
-                    const response = await fetch(apiUrl);
-                    const data = await response.json();
-                    
-                    loading.style.display = 'none';
-                    
-                    if (data && data.data && data.data.length > 0) {
-                        const tracks = data.data;
-                        spotifyResult.style.display = 'block';
-                        
-                        let html = `<h4>Hasil Pencarian untuk "${query}":</h4>`;
-                        
-                        tracks.slice(0, 5).forEach(track => {
-                            html += `
-                                <div class="track-item">
-                                    <strong>${track.name}</strong><br>
-                                    <span>Artis: ${track.artists || 'Tidak diketahui'}</span><br>
-                                    <span>Album: ${track.album || 'Tidak diketahui'}</span><br>
-                                    <span>Durasi: ${track.duration || 'Tidak diketahui'}</span>
-                                </div>
-                            `;
-                        });
-                        
-                        spotifyResult.innerHTML = html;
-                        resultButtons.style.display = 'block';
-                        showNotification('Pencarian Spotify berhasil!');
-                    } else {
-                        showNotification('Tidak ada hasil ditemukan di Spotify.');
-                    }
-                    
-                } catch (error) {
-                    console.error('Error:', error);
-                    loading.style.display = 'none';
-                    showNotification('Terjadi kesalahan: ' + error.message);
-                }
-            }
-            
-            
-            function clearResults() {
-                resultImage.style.display = 'none';
-                textResult.style.display = 'none';
-                textResult.innerHTML = '';
-                spotifyResult.style.display = 'none';
-                spotifyResult.innerHTML = '';
-                resultButtons.style.display = 'none';
-            }
-            
-          
-            function showNotification(message) {
-                notificationText.textContent = message;
-                notification.classList.add('show');
-                
-                setTimeout(() => {
-                    notification.classList.remove('show');
-                }, 3000);
-            }
-            
-            
-            const now = new Date();
-            const hours = now.getHours().toString().padStart(2, '0');
-            const minutes = now.getMinutes().toString().padStart(2, '0');
-            document.getElementById('timeValue').value = `${hours}:${minutes}`;
+    // Elements
+    const tabs = document.querySelectorAll('.tab');
+    const tabContents = document.querySelectorAll('.tab-content');
+    const loading = document.getElementById('loading');
+    const resultImage = document.getElementById('resultImage');
+    const textResult = document.getElementById('textResult');
+    const spotifyResult = document.getElementById('spotifyResult');
+    const downloadBtn = document.getElementById('downloadBtn');
+    const shareBtn = document.getElementById('shareBtn');
+    const newGenerateBtn = document.getElementById('newGenerateBtn');
+    const resultButtons = document.getElementById('resultButtons');
+    const notification = document.getElementById('notification');
+    const notificationText = document.getElementById('notificationText');
+    
+    // Tabs
+    tabs.forEach(tab => {
+        tab.addEventListener('click', function() {
+            const tabId = this.getAttribute('data-tab');
+            tabs.forEach(t => t.classList.remove('active'));
+            this.classList.add('active');
+            tabContents.forEach(content => content.classList.remove('active'));
+            document.getElementById(`${tabId}-tab`).classList.add('active');
+            clearResults();
         });
+    });
+    
+    // iPhone quote generator
+    const generateIphone = document.getElementById('generateIphone');
+    const batteryPercentage = document.getElementById('batteryPercentage');
+    const batteryValue = document.getElementById('batteryValue');
+    
+    batteryPercentage.addEventListener('input', function() {
+        batteryValue.textContent = `${this.value}%`;
+    });
+    
+    generateIphone.addEventListener('click', function() {
+        const message = document.getElementById('messageText').value.trim();
+        if (!message) {
+            showNotification('Masukkan pesan terlebih dahulu!');
+            return;
+        }
+        generateIphoneQuote();
+    });
+    
+    // Tweet generator
+    const generateTweet = document.getElementById('generateTweet');
+    generateTweet.addEventListener('click', function() {
+        const tweetText = document.getElementById('tweetText').value.trim();
+        if (!tweetText) {
+            showNotification('Masukkan teks tweet terlebih dahulu!');
+            return;
+        }
+        generateTweetImage();
+    });
+    
+    // FB comment generator
+    const generateFb = document.getElementById('generateFb');
+    generateFb.addEventListener('click', function() {
+        const fbText = document.getElementById('fbText').value.trim();
+        if (!fbText) {
+            showNotification('Masukkan teks terlebih dahulu!');
+            return;
+        }
+        generateFbComment();
+    });
+    
+    // Cek Hoki
+    const checkHoki = document.getElementById('checkHoki');
+    checkHoki.addEventListener('click', function() {
+        const phoneNumber = document.getElementById('phoneNumber').value.trim();
+        if (!phoneNumber) {
+            showNotification('Masukkan nomor telepon terlebih dahulu!');
+            return;
+        }
+        checkPhoneHoki();
+    });
+    
+    // Spotify Search
+    const searchSpotify = document.getElementById('searchSpotify');
+    searchSpotify.addEventListener('click', function() {
+        const query = document.getElementById('spotifyQuery').value.trim();
+        if (!query) {
+            showNotification('Masukkan kata kunci pencarian terlebih dahulu!');
+            return;
+        }
+        searchSpotifyTracks();
+    });
+    
+    // Download button
+    downloadBtn.addEventListener('click', function() {
+        if (resultImage.src) {
+            const a = document.createElement('a');
+            a.href = resultImage.src;
+            a.download = `selax-x7-result-${Date.now()}.jpg`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            showNotification('Gambar berhasil diunduh!');
+        }
+    });
+    
+    // New generate
+    newGenerateBtn.addEventListener('click', function() {
+        clearResults();
+    });
+    
+    // ==== FUNCTION DEFINITIONS ====
+    async function generateIphoneQuote() {
+        loading.style.display = 'block';
+        clearResults();
+        try {
+            const time = document.getElementById('timeValue').value;
+            const message = document.getElementById('messageText').value;
+            const carrier = document.getElementById('carrierName').value;
+            const battery = batteryPercentage.value;
+            const signal = document.getElementById('signalStrength').value;
+            
+            const apiUrl = `https://brat.siputzx.my.id/iphone-quoted?time=${encodeURIComponent(time)}&messageText=${encodeURIComponent(message)}&carrierName=${encodeURIComponent(carrier)}&batteryPercentage=${battery}&signalStrength=${signal}&emojiStyle=apple`;
+            
+            resultImage.src = apiUrl;
+            resultImage.onload = function() {
+                loading.style.display = 'none';
+                resultImage.style.display = 'block';
+                resultButtons.style.display = 'block';
+                showNotification('Quote berhasil dibuat!');
+            };
+            resultImage.onerror = function() {
+                loading.style.display = 'none';
+                showNotification('Error memuat gambar. Coba lagi nanti.');
+            };
+        } catch (error) {
+            console.error('Error:', error);
+            loading.style.display = 'none';
+            showNotification('Terjadi kesalahan: ' + error.message);
+        }
+    }
+    
+    async function generateTweetImage() {
+        loading.style.display = 'block';
+        clearResults();
+        try {
+            const profile = "https%3A%2F%2Ffiles.catbox.moe%2Fr2oyr8.png";
+            const name = encodeURIComponent(document.getElementById('profileName').value);
+            const username = encodeURIComponent(document.getElementById('username').value);
+            const tweet = encodeURIComponent(document.getElementById('tweetText').value);
+            const theme = document.getElementById('tweetTheme').value;
+            const retweets = document.getElementById('retweets').value;
+            const quotes = document.getElementById('quotes').value;
+            const likes = document.getElementById('likes').value;
+            
+            const apiUrl = `https://api.siputzx.my.id/api/m/tweet?profile=${profile}&name=${name}&username=${username}&tweet=${tweet}&image=null&theme=${theme}&retweets=${retweets}&quotes=${quotes}&likes=${likes}&client=Twitter%20for%20iPhone`;
+            
+            resultImage.src = apiUrl;
+            resultImage.onload = function() {
+                loading.style.display = 'none';
+                resultImage.style.display = 'block';
+                resultButtons.style.display = 'block';
+                showNotification('Tweet berhasil dibuat!');
+            };
+            resultImage.onerror = function() {
+                loading.style.display = 'none';
+                showNotification('Error memuat gambar. Coba lagi nanti.');
+            };
+        } catch (error) {
+            console.error('Error:', error);
+            loading.style.display = 'none';
+            showNotification('Terjadi kesalahan: ' + error.message);
+        }
+    }
+    
+    async function generateFbComment() {
+        loading.style.display = 'block';
+        clearResults();
+        try {
+            const fbText = document.getElementById('fbText').value;
+            const parts = fbText.split(' ');
+            const name = parts[0];
+            const comment = parts.slice(1).join(' ');
+            
+            const apiUrl = `https://api.sxtream.xyz/maker/fake-chat-fb?name=${encodeURIComponent(name)}&comment=${encodeURIComponent(comment)}&profileUrl=https%3A%2F%2Ffiles.catbox.moe%2Ff7g0nx.jpg`;
+            
+            resultImage.src = apiUrl;
+            resultImage.onload = function() {
+                loading.style.display = 'none';
+                resultImage.style.display = 'block';
+                resultButtons.style.display = 'block';
+                showNotification('FB Comment berhasil dibuat!');
+            };
+            resultImage.onerror = function() {
+                loading.style.display = 'none';
+                showNotification('Error memuat gambar. Coba lagi nanti.');
+            };
+        } catch (error) {
+            console.error('Error:', error);
+            loading.style.display = 'none';
+            showNotification('Terjadi kesalahan: ' + error.message);
+        }
+    }
+    
+    async function checkPhoneHoki() {
+        loading.style.display = 'block';
+        clearResults();
+        try {
+            const phoneNumber = document.getElementById('phoneNumber').value;
+            const apiUrl = `https://api.siputzx.my.id/api/primbon/nomorhoki?phoneNumber=${encodeURIComponent(phoneNumber)}`;
+            
+            const response = await fetch(apiUrl);
+            const data = await response.json();
+            loading.style.display = 'none';
+            
+            if (data && data.status) {
+                textResult.style.display = 'block';
+                textResult.innerHTML = `
+                    <h4>Hasil Cek Hoki untuk ${phoneNumber}:</h4>
+                    <pre>${JSON.stringify(data, null, 2)}</pre>
+                `;
+                resultButtons.style.display = 'block';
+                showNotification('Cek hoki berhasil!');
+            } else {
+                showNotification('Tidak dapat membaca hasil cek hoki.');
+            }
+        } catch (error) {
+            console.error('Error:', error);
+            loading.style.display = 'none';
+            showNotification('Terjadi kesalahan: ' + error.message);
+        }
+    }
+    
+    async function searchSpotifyTracks() {
+        loading.style.display = 'block';
+        clearResults();
+        try {
+            const query = document.getElementById('spotifyQuery').value;
+            const apiUrl = `https://api.siputzx.my.id/api/s/spotify?query=${encodeURIComponent(query)}`;
+            
+            const response = await fetch(apiUrl);
+            const data = await response.json();
+            loading.style.display = 'none';
+            
+            if (data && data.data && data.data.length > 0) {
+                const tracks = data.data;
+                spotifyResult.style.display = 'block';
+                let html = `<h4>Hasil Pencarian untuk "${query}":</h4>`;
+                tracks.slice(0, 5).forEach(track => {
+                    html += `
+                        <div class="track-item">
+                            <strong>${track.name}</strong><br>
+                            <span>Artis: ${track.artists || 'Tidak diketahui'}</span><br>
+                            <span>Album: ${track.album || 'Tidak diketahui'}</span><br>
+                            <span>Durasi: ${track.duration || 'Tidak diketahui'}</span>
+                        </div>
+                    `;
+                });
+                spotifyResult.innerHTML = html;
+                resultButtons.style.display = 'block';
+                showNotification('Pencarian Spotify berhasil!');
+            } else {
+                showNotification('Tidak ada hasil ditemukan di Spotify.');
+            }
+        } catch (error) {
+            console.error('Error:', error);
+            loading.style.display = 'none';
+            showNotification('Terjadi kesalahan: ' + error.message);
+        }
+    }
+    
+    function clearResults() {
+        resultImage.style.display = 'none';
+        textResult.style.display = 'none';
+        textResult.innerHTML = '';
+        spotifyResult.style.display = 'none';
+        spotifyResult.innerHTML = '';
+        resultButtons.style.display = 'none';
+    }
+    
+    function showNotification(message) {
+        notificationText.textContent = message;
+        notification.classList.add('show');
+        setTimeout(() => {
+            notification.classList.remove('show');
+        }, 3000);
+    }
+    
+    
+    const now = new Date();
+    const hours = now.getHours().toString().padStart(2, '0');
+    const minutes = now.getMinutes().toString().padStart(2, '0');
+    document.getElementById('timeValue').value = `${hours}:${minutes}`;
+});
     </script>
 </body>
 </html>
