@@ -1,112 +1,251 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Kamera Cerdas</title>
-  <style>
-    body {
-      margin: 0;
-      background: #000;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      height: 100vh;
-      color: white;
-      font-family: system-ui, sans-serif;
-    }
-    video {
-      width: 90vw;
-      max-width: 480px;
-      border-radius: 12px;
-      transform: scaleX(-1);
-      box-shadow: 0 0 20px rgba(0,0,0,0.6);
-    }
-    #status {
-      position: absolute;
-      top: 30px;
-      font-size: 1.3em;
-      font-weight: bold;
-      background: rgba(0,0,0,0.5);
-      padding: 8px 16px;
-      border-radius: 10px;
-      backdrop-filter: blur(8px);
-      text-align: center;
-    }
-  </style>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Unban WhatsApp — GusOfcXD</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<style>
+:root{
+  --bg:#0a0c10;
+  --card:#11141a;
+  --accent:#1de9b6;
+  --accent2:#2979ff;
+  --text:#e6eef6;
+  --muted:#8f9bb3;
+  --font:'Outfit', sans-serif;
+}
+html,body{
+  margin:0;
+  height:100%;
+  background:var(--bg);
+  color:var(--text);
+  font-family:var(--font);
+}
+*{box-sizing:border-box;transition:all .25s ease}
+
+.topbar{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:12px 18px;
+  background:rgba(255,255,255,0.02);
+  border-bottom:1px solid rgba(255,255,255,0.05);
+  backdrop-filter:blur(6px);
+}
+.menu-btn{
+  background:none;
+  border:none;
+  color:var(--accent);
+  font-size:22px;
+  cursor:pointer;
+}
+.title-top{font-weight:600;font-size:18px}
+
+.sidebar{
+  position:fixed;
+  top:0;left:-260px;
+  width:260px;height:100%;
+  background:var(--card);
+  border-right:1px solid rgba(255,255,255,0.08);
+  padding:70px 18px;
+  transition:left 0.3s ease;
+  z-index:999;
+}
+.sidebar.active{left:0}
+.sidebar a{
+  color:var(--text);
+  text-decoration:none;
+  display:flex;
+  align-items:center;
+  padding:10px 8px;
+  border-radius:8px;
+  font-size:15px;
+}
+.sidebar a i{margin-right:8px;color:var(--accent)}
+.sidebar a:hover{background:rgba(255,255,255,0.05)}
+.submenu{list-style:none;margin:4px 0 8px 20px;display:none}
+.submenu.show{display:block}
+.submenu a{font-size:14px;color:var(--muted)}
+.overlay{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,0.5);
+  display:none;
+  z-index:998;
+}
+.overlay.active{display:block}
+
+.robot-box{
+  background:var(--card);
+  border:1px solid rgba(255,255,255,0.05);
+  border-radius:12px;
+  width:300px;
+  margin:40px auto 20px;
+  padding:20px;
+  text-align:center;
+  box-shadow:0 0 25px rgba(0,0,0,0.3);
+}
+.robot-face{
+  width:110px;height:110px;
+  margin:0 auto 10px;
+  border-radius:50%;
+  overflow:hidden;
+  box-shadow:0 0 25px rgba(29,233,182,0.2);
+}
+.robot-title-normal{font-size:18px;font-weight:600;color:var(--accent)}
+
+.form-label{display:block;width:300px;margin:12px auto 6px;font-size:13px;color:var(--muted)}
+.input, select, .btn{
+  display:block;
+  width:300px;
+  margin:0 auto;
+  padding:11px 13px;
+  border-radius:10px;
+  border:1px solid rgba(255,255,255,0.08);
+  background:#0f141c;
+  color:#d0d7df;
+  font-size:14px;
+  outline:none;
+}
+.input:focus, select:focus{border-color:var(--accent);color:#fff}
+.btn{
+  margin-top:20px;
+  background:linear-gradient(90deg,var(--accent),var(--accent2));
+  border:none;
+  color:#041018;
+  font-weight:700;
+  cursor:pointer;
+  box-shadow:0 4px 20px rgba(29,233,182,0.25);
+}
+.btn:hover{opacity:0.9;transform:translateY(-1px)}
+.status{width:300px;margin:12px auto 0;font-size:13px;color:var(--muted);text-align:center}
+.small{width:300px;margin:6px auto 0;font-size:12px;color:var(--muted);text-align:center}
+
+#lockModal{
+  position:fixed;
+  inset:0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  z-index:2000;
+  background:rgba(0,0,0,0.8);
+}
+.lock-card{
+  width:90%;
+  max-width:480px;
+  background:var(--card);
+  padding:28px 22px;
+  border-radius:14px;
+  text-align:center;
+  box-shadow:0 0 35px rgba(0,0,0,0.4);
+}
+.lock-card h2{color:var(--accent);margin:0 0 10px}
+.lock-card p{color:var(--muted);font-size:14px;line-height:1.6}
+.btn-full{width:100%!important;margin:10px 0;font-weight:600}
+.progress-wrapper{width:100%;height:14px;border-radius:8px;overflow:hidden;margin-top:16px;background:#1b2230}
+#progressBar{height:100%;width:0%;background:linear-gradient(90deg,var(--accent),var(--accent2))}
+.small-hint{font-size:12px;color:var(--muted);margin-top:8px}
+@media(max-width:600px){
+  .robot-box,.input,.btn,.status,.small,.form-label{width:90%}
+  .sidebar{width:220px}
+}
+</style>
 </head>
 <body>
-  <div id="status">⏳ Memuat kamera...</div>
-  <video id="video" autoplay playsinline></video>
+<header class="topbar">
+  <button class="menu-btn" id="menuToggle"><i class="fa-solid fa-bars"></i></button>
+  <div class="title-top">GusOfcXD</div>
+</header>
 
-  <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.12.0/dist/tf.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/blazeface@0.1.5/dist/blazeface.min.js"></script>
+<nav class="sidebar" id="sidebarMenu">
+  <ul>
+    <li>
+      <a href="javascript:void(0)" id="contactToggle"><i class="fa-solid fa-headset"></i> Contact Admin <i class="fa-solid fa-chevron-down" style="margin-left:auto;font-size:12px;"></i></a>
+      <ul class="submenu" id="contactSubmenu">
+        <li><a href="https://wa.me/6285657233529" target="_blank"><i class="fa-brands fa-whatsapp"></i> WhatsApp</a></li>
+        <li><a href="https://t.me/gofc404" target="_blank"><i class="fa-brands fa-telegram"></i> Telegram</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+<div class="overlay" id="overlay"></div>
 
-  <script>
-  const video = document.getElementById('video');
-  const statusText = document.getElementById('status');
+<div id="lockModal">
+  <div class="lock-card" id="lockCard">
+    <h2>Akses Dikunci 🔒</h2>
+    <p>Website ini gratis. Untuk melanjutkan, silakan join grup dan share link website ke teman agar kunci terbuka.</p>
+    <button id="joinBtn" class="btn btn-full">1. Join Grup WhatsApp</button>
+    <button id="shareBtn" class="btn btn-full">2. Share Website</button>
+    <div class="progress-wrapper"><div id="progressBar"></div></div>
+    <div class="small-hint" id="lockStatus">0% selesai</div>
+  </div>
+</div>
 
-  async function setupCamera() {
-    const stream = await navigator.mediaDevices.getUserMedia({ video: true });
-    video.srcObject = stream;
-    return new Promise(resolve => {
-      video.onloadedmetadata = () => resolve(video);
-    });
-  }
+<div class="robot-box">
+  <div class="robot-face"><img src="https://i.imgur.com/sgIjNk8.jpeg" style="width:100%;height:100%;object-fit:cover" alt="logo"></div>
+  <div class="robot-title-normal">Unban WhatsApp</div>
+</div>
 
-  async function main() {
-    statusText.textContent = "🔄 Memuat model...";
-    const model = await blazeface.load();
-    statusText.textContent = "✅ Model siap";
+<label class="form-label" for="nomor">Nomor WhatsApp yang diblokir</label>
+<input type="tel" id="nomor" class="input" placeholder="+62xxxxxxxxxxx"/>
+<label class="form-label" for="alasan">Pilih Alasan Banding</label>
+<select id="alasan" class="input">
+  <option value="">-- Pilih alasan --</option>
+  <option value="Akun Saya Diblokir Karena Kesalahan (Spam)">
+    Saya tidak pernah mengirim pesan spam atau melanggar pedoman komunitas. Mungkin sistem WhatsApp salah mendeteksi aktivitas saya sebagai spam. Mohon bantuannya untuk meninjau ulang pemblokiran ini agar akun saya bisa digunakan kembali seperti semula.
+  </option>
+  <option value="Akun Saya Diblokir Permanen Secara Tidak Adil">
+    Akun saya dinonaktifkan secara permanen padahal saya tidak melakukan pelanggaran apa pun. Saya hanya menggunakan WhatsApp untuk komunikasi pribadi dan pekerjaan. Saya mohon agar tim dukungan WhatsApp dapat meninjau kembali keputusan pemblokiran ini, karena akun ini sangat penting untuk aktivitas harian saya.
+  </option>
+</select>
+<button class="btn" id="sendBtn">KIRIM BANDING</button>
+<div class="status" id="statusArea"></div>
+<div class="small">Setelah klik, sistem akan membuka Gmail. Silakan kirim pesan dan tunggu balasan dari pihak WhatsApp.</div>
 
-    await setupCamera();
-    video.play();
-    statusText.textContent = "📸 Kamera aktif";
-
-    detectLoop(model);
-  }
-
-  // posisi tengah terakhir
-  let lastX = null, lastY = null;
-
-  async function detectLoop(model) {
-    const predictions = await model.estimateFaces(video, false);
-    const centerX = video.videoWidth / 2;
-    const centerY = video.videoHeight / 2;
-
-    if (predictions.length > 0) {
-      const face = predictions[0];
-      const [x1, y1] = face.topLeft;
-      const [x2, y2] = face.bottomRight;
-      const faceCenterX = (x1 + x2) / 2;
-      const faceCenterY = (y1 + y2) / 2;
-
-      let dx = faceCenterX - centerX;
-      let dy = faceCenterY - centerY;
-
-      let direction = "✅ Wajah di tengah";
-
-      const tolerance = 40; // seberapa sensitif
-      if (dx < -tolerance) direction = "👈 Gerak ke kiri";
-      else if (dx > tolerance) direction = "👉 Gerak ke kanan";
-      else if (dy < -tolerance) direction = "👆 Gerak ke atas";
-      else if (dy > tolerance) direction = "👇 Gerak ke bawah";
-
-      statusText.textContent = direction;
-      statusText.style.background = "rgba(0,128,0,0.6)";
-    } else {
-      statusText.textContent = "❌ Tidak Ada Wajah";
-      statusText.style.background = "rgba(128,0,0,0.6)";
-    }
-
-    requestAnimationFrame(() => detectLoop(model));
-  }
-
-  main().catch(err => {
-    console.error(err);
-    statusText.textContent = "❌ Gagal memuat kamera";
-  });
-  </script>
+<script>
+const lockModal=document.getElementById('lockModal');
+const progressBar=document.getElementById('progressBar');
+const lockStatus=document.getElementById('lockStatus');
+let joined=false,shared=false;
+function updateProgress(){
+  let p=0;if(joined)p+=50;if(shared)p+=50;
+  progressBar.style.width=p+"%";
+  lockStatus.textContent=p+"% selesai";
+  if(p===100)setTimeout(()=>{lockModal.style.display="none";},600);
+}
+joinBtn.onclick=()=>{
+  window.open("https://chat.whatsapp.com/CowgNcxXuIO88XQSpmMoFz?mode=ems_copy_t","_blank");
+  joined=true;
+  updateProgress();
+}
+shareBtn.onclick=()=>{
+  const link="https://onedeev.github.io/onedev/";
+  const msg=`Website Unban WhatsApp oleh GusOfcXD\nGratis, Aman, dan Terbukti Work 100%\n${link}`;
+  window.open("https://api.whatsapp.com/send?text="+encodeURIComponent(msg),"_blank");
+  shared=true;
+  updateProgress();
+};
+menuToggle.onclick=()=>{sidebarMenu.classList.toggle('active');overlay.classList.toggle('active')};
+overlay.onclick=()=>{sidebarMenu.classList.remove('active');overlay.classList.remove('active')};
+contactToggle.onclick=()=>{contactSubmenu.classList.toggle('show')};
+const sendBtn=document.getElementById('sendBtn');
+const nomor=document.getElementById('nomor');
+const alasan=document.getElementById('alasan');
+const status=document.getElementById('statusArea');
+function enc(v){return encodeURIComponent(v||'')}
+function normalize(n){if(!n)return n;n=n.trim();if(n.startsWith('0'))return '62'+n.slice(1);return n;}
+sendBtn.onclick=()=>{
+  const n=normalize(nomor.value), a=alasan.value;
+  if(!n||!a){status.textContent='Isi nomor dan alasan terlebih dahulu.';return;}
+  const to='support@support.whatsapp.com';
+  const subj='[Banding WhatsApp] '+a;
+  const body=`Halo tim dukungan WhatsApp,\nSaya ingin mengajukan banding untuk nomor ${n}\nAlasan: ${a}`;
+  const mailto=`mailto:${to}?subject=${enc(subj)}&body=${enc(body)}`;
+  window.location.href=mailto;
+  status.textContent='Membuka Gmail...';
+};
+</script>
 </body>
-</html>
+  </html>
