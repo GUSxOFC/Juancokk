@@ -1,776 +1,249 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> Tools GusOfcXD 404 </title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        :root {
-            --orange: #ff7700;
-            --orange-light: #ff9433;
-            --orange-dark: #e65c00;
-            --black: #111111;
-            --black-light: #222222;
-            --text-glow: 0 0 10px var(--orange), 0 0 20px var(--orange);
-        }
-        
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-        
-        body {
-            background-color: var(--black);
-            color: white;
-            min-height: 100vh;
-            padding: 20px;
-            background-image: 
-                radial-gradient(circle at 10% 20%, rgba(255, 119, 0, 0.1) 0%, transparent 20%),
-                radial-gradient(circle at 90% 80%, rgba(255, 119, 0, 0.1) 0%, transparent 20%);
-        }
-        
-        .container {
-            max-width: 1000px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-        
-        header {
-            text-align: center;
-            margin-bottom: 30px;
-            padding: 20px;
-            border-radius: 10px;
-            background: linear-gradient(145deg, var(--black-light), var(--black));
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
-            position: relative;
-            overflow: hidden;
-        }
-        
-        header::before {
-            content: '';
-            position: absolute;
-            top: -10px;
-            left: -10px;
-            right: -10px;
-            height: 30px;
-            background: var(--orange);
-            filter: blur(15px);
-            z-index: -1;
-        }
-        
-        h1 {
-            color: var(--orange);
-            font-size: 2.5rem;
-            text-shadow: var(--text-glow);
-            margin-bottom: 10px;
-        }
-        
-        .tab-container {
-            display: flex;
-            justify-content: center;
-            margin-bottom: 20px;
-            gap: 10px;
-            flex-wrap: wrap;
-        }
-        
-        .tab {
-            background: var(--black-light);
-            padding: 12px 20px;
-            border-radius: 8px 8px 0 0;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            border-bottom: 3px solid transparent;
-        }
-        
-        .tab.active {
-            background: var(--black);
-            border-bottom: 3px solid var(--orange);
-            color: var(--orange);
-        }
-        
-        .tab-content {
-            display: none;
-        }
-        
-        .tab-content.active {
-            display: block;
-        }
-        
-        .input-section {
-            background: var(--black-light);
-            padding: 20px;
-            border-radius: 10px;
-            margin-bottom: 20px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-        }
-        
-        .input-group {
-            margin-bottom: 15px;
-        }
-        
-        .input-group label {
-            display: block;
-            margin-bottom: 8px;
-            color: var(--orange);
-        }
-        
-        textarea, input, select {
-            width: 100%;
-            padding: 12px;
-            border-radius: 8px;
-            border: 2px solid var(--orange);
-            background-color: rgba(0, 0, 0, 0.3);
-            color: white;
-            font-size: 16px;
-            resize: vertical;
-        }
-        
-        textarea:focus, input:focus, select:focus {
-            outline: none;
-            box-shadow: 0 0 10px var(--orange);
-        }
-        
-        .options-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 15px;
-        }
-        
-        .generate-btn {
-            background: linear-gradient(to right, var(--orange-dark), var(--orange));
-            color: white;
-            border: none;
-            padding: 15px 30px;
-            border-radius: 8px;
-            cursor: pointer;
-            font-weight: bold;
-            font-size: 1.1rem;
-            transition: all 0.3s ease;
-            display: block;
-            margin: 20px auto;
-            width: 100%;
-            max-width: 300px;
-        }
-        
-        .generate-btn:hover {
-            background: linear-gradient(to right, var(--orange), var(--orange-light));
-            box-shadow: 0 0 15px var(--orange);
-            transform: translateY(-2px);
-        }
-        
-        .result-section {
-            background: var(--black-light);
-            padding: 20px;
-            border-radius: 10px;
-            margin-top: 20px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-            text-align: center;
-        }
-        
-        .result-section h3 {
-            color: var(--orange);
-            margin-bottom: 15px;
-            text-shadow: 0 0 5px var(--orange);
-        }
-        
-        #resultImage {
-            max-width: 100%;
-            border-radius: 8px;
-            margin-bottom: 15px;
-            display: none;
-            border: 2px solid var(--orange);
-        }
-        
-        #textResult {
-            background: rgba(0, 0, 0, 0.3);
-            padding: 15px;
-            border-radius: 8px;
-            text-align: left;
-            margin: 15px 0;
-            display: none;
-            max-height: 300px;
-            overflow-y: auto;
-        }
-        
-        .download-btn {
-            background: linear-gradient(to right, var(--orange-dark), var(--orange));
-            color: white;
-            border: none;
-            padding: 12px 25px;
-            border-radius: 8px;
-            cursor: pointer;
-            font-weight: bold;
-            transition: all 0.3s ease;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            margin: 10px 5px;
-        }
-        
-        .download-btn:hover {
-            background: linear-gradient(to right, var(--orange), var(--orange-light));
-            box-shadow: 0 0 15px var(--orange);
-        }
-        
-        .loading {
-            display: none;
-            color: var(--orange);
-            text-align: center;
-            margin: 20px 0;
-            font-size: 1.2rem;
-        }
-        
-        .loading::after {
-            content: '...';
-            animation: dots 1.5s infinite;
-        }
-        
-        @keyframes dots {
-            0%, 20% { content: '.'; }
-            40% { content: '..'; }
-            60%, 100% { content: '...'; }
-        }
-        
-        .notification {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            padding: 15px 20px;
-            background: var(--black-light);
-            color: var(--orange);
-            border-left: 4px solid var(--orange);
-            border-radius: 4px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
-            transform: translateX(100%);
-            transition: transform 0.3s ease;
-            z-index: 1000;
-        }
-        
-        .notification.show {
-            transform: translateX(0);
-        }
-        
-        .spotify-result {
-            text-align: left;
-            margin: 15px 0;
-            display: none;
-        }
-        
-        .track-item {
-            background: rgba(0, 0, 0, 0.3);
-            padding: 15px;
-            border-radius: 8px;
-            margin-bottom: 10px;
-            border-left: 4px solid var(--orange);
-        }
-        
-        footer {
-            text-align: center;
-            margin-top: 30px;
-            color: #666;
-            font-size: 0.9rem;
-        }
-        
-        @media (max-width: 768px) {
-            .options-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            h1 {
-                font-size: 2rem;
-            }
-            
-            .tab {
-                padding: 10px 15px;
-                font-size: 0.9rem;
-            }
-        }
-    </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>control bot telegram </title>
+<link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Ubuntu:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#050505;
+  --panel:#0a0a0a;
+  --accent:#00ff9c;
+  --muted:#9fffcf;
+}
+*{box-sizing:border-box}
+body{
+  margin:0;
+  background:linear-gradient(180deg,#000 0%,#020305 100%);
+  color:var(--muted);
+  font-family:'Ubuntu',sans-serif;
+  padding:24px;
+}
+.wrap{
+  max-width:950px;
+  margin:0 auto;
+  padding:20px;
+  border:1px solid rgba(0,255,156,0.1);
+  border-radius:12px;
+  background-color:var(--panel);
+  box-shadow:0 0 20px rgba(0,255,156,0.06);
+}
+header{
+  display:flex;
+  align-items:center;
+  gap:14px;
+  margin-bottom:30px;
+}
+.logo{
+  width:58px;
+  height:58px;
+  border-radius:10px;
+  background:linear-gradient(135deg,#002b1a,#00452b);
+  color:var(--accent);
+  font-family:'Share Tech Mono',monospace;
+  display:grid;
+  place-items:center;
+  font-size:20px;
+  font-weight:700;
+}
+h1{margin:0;color:#aff;letter-spacing:1px;font-family:'Share Tech Mono',monospace;}
+p.lead{color:#8ff5c9;margin:6px 0 0;font-size:13px}
+.section{
+  background:#0e0e0e;
+  border:1px solid rgba(0,255,156,0.1);
+  border-radius:10px;
+  padding:18px;
+  margin-bottom:28px;
+  box-shadow:0 3px 10px rgba(0,0,0,0.4);
+}
+label{display:block;margin-bottom:6px;font-size:13px;color:#aff}
+input[type=text],input[type=number],select,textarea{
+  width:100%;
+  padding:10px;
+  border-radius:8px;
+  border:1px solid rgba(0,255,156,0.15);
+  background:rgba(255,255,255,0.03);
+  color:#9fffcf;
+  font-size:14px;
+}
+textarea{min-height:80px;resize:vertical}
+.btn{
+  background:linear-gradient(90deg,var(--accent),#00ffaa);
+  border:none;
+  color:#000;
+  font-weight:700;
+  padding:10px 14px;
+  border-radius:8px;
+  cursor:pointer;
+  box-shadow:0 4px 14px rgba(0,255,156,0.15);
+}
+.btn:hover{opacity:0.85}
+.btn.ghost{
+  background:transparent;
+  border:1px solid rgba(0,255,156,0.2);
+  color:var(--muted);
+}
+.log{
+  height:160px;
+  overflow:auto;
+  background:rgba(0,0,0,0.3);
+  border-radius:8px;
+  padding:10px;
+  font-size:12px;
+  font-family:monospace;
+}
+.small{font-size:12px;color:#8ff5c9}
+.footer{text-align:center;font-size:12px;color:#80ffc5;margin-top:30px}
+</style>
 </head>
 <body>
-    <div class="container">
-        <header>
-            <h1>GusOfcXD 404</h1>
-            <p>Generator untuk berbagai kebutuhan media sosial</p>
-        </header>
-        
-        <div class="tab-container">
-            <div class="tab active" data-tab="iphone">iPhone Quoted</div>
-            <div class="tab" data-tab="tweet">Tweet Generator</div>
-            <div class="tab" data-tab="fbqc">Fbqc Generator</div>
-            <div class="tab" data-tab="hoki">Cek Hoki</div>
-            <div class="tab" data-tab="spotify">Spotify</div>
-        </div>
-        
-        
-        <div class="tab-content active" id="iphone-tab">
-            <div class="input-section">
-                <h3>iPhone Quoted Generator</h3>
-                
-                <div class="input-group">
-                    <label for="messageText">Pesan (Message Text)</label>
-                    <textarea id="messageText" placeholder="Masukkan pesan yang ingin ditampilkan..." rows="4"></textarea>
-                </div>
-                
-                <div class="options-grid">
-                    <div class="input-group">
-                        <label for="timeValue">Waktu (Time)</label>
-                        <input type="time" id="timeValue" value="09:41">
-                    </div>
-                    
-                    <div class="input-group">
-                        <label for="carrierName">Nama Operator (Carrier Name)</label>
-                        <input type="text" id="carrierName" placeholder="Contoh: SELULAR" value="SELULAR">
-                    </div>
-                    
-                    <div class="input-group">
-                        <label for="batteryPercentage">Persentase Baterai</label>
-                        <input type="range" id="batteryPercentage" min="0" max="100" value="85">
-                        <span id="batteryValue">85%</span>
-                    </div>
-                    
-                    <div class="input-group">
-                        <label for="signalStrength">Kekuatan Sinyal</label>
-                        <select id="signalStrength">
-                            <option value="0">Tidak ada sinyal</option>
-                            <option value="1">Sinyal lemah</option>
-                            <option value="2" selected>Sinyal sedang</option>
-                            <option value="3">Sinyal kuat</option>
-                            <option value="4">Sinyal penuh</option>
-                        </select>
-                    </div>
-                </div>
-                
-                <button class="generate-btn" id="generateIphone">
-                    <i class="fas fa-cog"></i> Generate iPhone Quote
-                </button>
-            </div>
-        </div>
-        
-      
-        <div class="tab-content" id="tweet-tab">
-            <div class="input-section">
-                <h3>Tweet Generator</h3>
-                
-                <div class="input-group">
-                    <label for="tweetText">Tweet Text</label>
-                    <textarea id="tweetText" placeholder="Masukkan konten tweet..." rows="4"></textarea>
-                </div>
-                
-                <div class="options-grid">
-                    <div class="input-group">
-                        <label for="profileName">Nama Profil</label>
-                        <input type="text" id="profileName" placeholder="Nama" value="GusOfcXD 404">
-                    </div>
-                    
-                    <div class="input-group">
-                        <label for="username">Username</label>
-                        <input type="text" id="username" placeholder="Username" value="@gofc404">
-                    </div>
-                    
-                    <div class="input-group">
-                        <label for="retweets">Jumlah Retweet</label>
-                        <input type="number" id="retweets" value="16000">
-                    </div>
-                    
-                    <div class="input-group">
-                        <label for="quotes">Jumlah Quotes</label>
-                        <input type="number" id="quotes" value="1500">
-                    </div>
-                    
-                    <div class="input-group">
-                        <label for="likes">Jumlah Likes</label>
-                        <input type="number" id="likes" value="532000">
-                    </div>
-                    
-                    <div class="input-group">
-                        <label for="tweetTheme">Tema Tweet</label>
-                        <select id="tweetTheme">
-                            <option value="dark" selected>Dark</option>
-                            <option value="light">Light</option>
-                            <option value="dim">Dim</option>
-                        </select>
-                    </div>
-                </div>
-                
-                <button class="generate-btn" id="generateTweet">
-                    <i class="fas fa-cog"></i> Generate Tweet
-                </button>
-            </div>
-        </div>
-        
-
-        <div class="tab-content" id="fbqc-tab">
-            <div class="input-section">
-                <h3>Fbqc Generator</h3>
-                
-                <div class="input-group">
-                    <label for="fbText">Masukkan Nama dan Komentar (pisahkan dengan spasi)</label>
-                    <textarea id="fbText" placeholder="Nama Komentar..." rows="4"></textarea>
-                    <small>Contoh: John Doe Hello world!</small>
-                </div>
-                
-                <button class="generate-btn" id="generateFb">
-                    <i class="fas fa-cog"></i> Generate FB Comment
-                </button>
-            </div>
-        </div>
-        
-        
-        <div class="tab-content" id="hoki-tab">
-            <div class="input-section">
-                <h3>Cek Hoki Nomor Telepon</h3>
-                
-                <div class="input-group">
-                    <label for="phoneNumber">Nomor Telepon</label>
-                    <input type="text" id="phoneNumber" placeholder="Contoh: 08123456789">
-                </div>
-                
-                <button class="generate-btn" id="checkHoki">
-                    <i class="fas fa-cog"></i> Cek Hoki
-                </button>
-            </div>
-        </div>
-        
-
-        <div class="tab-content" id="spotify-tab">
-            <div class="input-section">
-                <h3>Cari Lagu di Spotify</h3>
-                
-                <div class="input-group">
-                    <label for="spotifyQuery">Cari Lagu atau Artis</label>
-                    <input type="text" id="spotifyQuery" placeholder="Contoh: GusOfcXD- Lagu Terbaru">
-                </div>
-                
-                <button class="generate-btn" id="searchSpotify">
-                    <i class="fas fa-cog"></i> Cari di Spotify
-                </button>
-            </div>
-        </div>
-        
-        
-        <div class="result-section">
-            <h3>Hasil Generator</h3>
-            <div class="loading" id="loading">Memproses</div>
-            <img id="resultImage" alt="Hasil generator">
-            <div id="textResult"></div>
-            <div id="spotifyResult" class="spotify-result"></div>
-            <div id="resultButtons" style="display: none;">
-                <button class="download-btn" id="downloadBtn">
-                    <i class="fas fa-download"></i> Download
-                </button>
-                <button class="download-btn" id="shareBtn">
-                    <i class="fas fa-share-alt"></i> Share
-                </button>
-                <button class="download-btn" id="newGenerateBtn">
-                    <i class="fas fa-plus"></i> Buat Baru
-                </button>
-            </div>
-        </div>
-        
-        <footer>
-            <p>Made in GusOfcXD 404</p>
-        </footer>
+<div class="wrap">
+  <header>
+    <div class="logo">GC</div>
+    <div>
+      <h1>GusOfcXD 404</h1>
+      <p class="lead">hek bumi pake termux 🫣😈</p>
     </div>
+  </header>
 
-    <div class="notification" id="notification">
-        <i class="fas fa-check-circle"></i> <span id="notificationText"></span>
+  <div class="section">
+    <label for="token">Masukkan Token Bot</label>
+    <input id="token" type="text" placeholder="Contoh: 123456:ABC..." autocomplete="off">
+    <div style="display:flex;gap:10px;margin-top:10px">
+      <button class="btn" id="loadChatsBtn">Muat Chat</button>
+      <button class="btn ghost" id="clearBtn">Kosongkan</button>
     </div>
+  </div>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-    // Elements
-    const tabs = document.querySelectorAll('.tab');
-    const tabContents = document.querySelectorAll('.tab-content');
-    const loading = document.getElementById('loading');
-    const resultImage = document.getElementById('resultImage');
-    const textResult = document.getElementById('textResult');
-    const spotifyResult = document.getElementById('spotifyResult');
-    const downloadBtn = document.getElementById('downloadBtn');
-    const shareBtn = document.getElementById('shareBtn');
-    const newGenerateBtn = document.getElementById('newGenerateBtn');
-    const resultButtons = document.getElementById('resultButtons');
-    const notification = document.getElementById('notification');
-    const notificationText = document.getElementById('notificationText');
-    
-    // Tabs
-    tabs.forEach(tab => {
-        tab.addEventListener('click', function() {
-            const tabId = this.getAttribute('data-tab');
-            tabs.forEach(t => t.classList.remove('active'));
-            this.classList.add('active');
-            tabContents.forEach(content => content.classList.remove('active'));
-            document.getElementById(`${tabId}-tab`).classList.add('active');
-            clearResults();
-        });
-    });
-    
-    // iPhone quote generator
-    const generateIphone = document.getElementById('generateIphone');
-    const batteryPercentage = document.getElementById('batteryPercentage');
-    const batteryValue = document.getElementById('batteryValue');
-    
-    batteryPercentage.addEventListener('input', function() {
-        batteryValue.textContent = `${this.value}%`;
-    });
-    
-    generateIphone.addEventListener('click', function() {
-        const message = document.getElementById('messageText').value.trim();
-        if (!message) {
-            showNotification('Masukkan pesan terlebih dahulu!');
-            return;
-        }
-        generateIphoneQuote();
-    });
-    
-    // Tweet generator
-    const generateTweet = document.getElementById('generateTweet');
-    generateTweet.addEventListener('click', function() {
-        const tweetText = document.getElementById('tweetText').value.trim();
-        if (!tweetText) {
-            showNotification('Masukkan teks tweet terlebih dahulu!');
-            return;
-        }
-        generateTweetImage();
-    });
-    
-    // FB comment generator
-    const generateFb = document.getElementById('generateFb');
-    generateFb.addEventListener('click', function() {
-        const fbText = document.getElementById('fbText').value.trim();
-        if (!fbText) {
-            showNotification('Masukkan teks terlebih dahulu!');
-            return;
-        }
-        generateFbComment();
-    });
-    
-    // Cek Hoki
-    const checkHoki = document.getElementById('checkHoki');
-    checkHoki.addEventListener('click', function() {
-        const phoneNumber = document.getElementById('phoneNumber').value.trim();
-        if (!phoneNumber) {
-            showNotification('Masukkan nomor telepon terlebih dahulu!');
-            return;
-        }
-        checkPhoneHoki();
-    });
-    
-    // Spotify Search
-    const searchSpotify = document.getElementById('searchSpotify');
-    searchSpotify.addEventListener('click', function() {
-        const query = document.getElementById('spotifyQuery').value.trim();
-        if (!query) {
-            showNotification('Masukkan kata kunci pencarian terlebih dahulu!');
-            return;
-        }
-        searchSpotifyTracks();
-    });
-    
-    // Download button
-    downloadBtn.addEventListener('click', function() {
-        if (resultImage.src) {
-            const a = document.createElement('a');
-            a.href = resultImage.src;
-            a.download = `selax-x7-result-${Date.now()}.jpg`;
-            document.body.appendChild(a);
-            a.click();
-            document.body.removeChild(a);
-            showNotification('Gambar berhasil diunduh!');
-        }
-    });
-    
-    // New generate
-    newGenerateBtn.addEventListener('click', function() {
-        clearResults();
-    });
-    
-    // ==== FUNCTION DEFINITIONS ====
-    async function generateIphoneQuote() {
-        loading.style.display = 'block';
-        clearResults();
-        try {
-            const time = document.getElementById('timeValue').value;
-            const message = document.getElementById('messageText').value;
-            const carrier = document.getElementById('carrierName').value;
-            const battery = batteryPercentage.value;
-            const signal = document.getElementById('signalStrength').value;
-            
-            const apiUrl = `https://brat.siputzx.my.id/iphone-quoted?time=${encodeURIComponent(time)}&messageText=${encodeURIComponent(message)}&carrierName=${encodeURIComponent(carrier)}&batteryPercentage=${battery}&signalStrength=${signal}&emojiStyle=apple`;
-            
-            resultImage.src = apiUrl;
-            resultImage.onload = function() {
-                loading.style.display = 'none';
-                resultImage.style.display = 'block';
-                resultButtons.style.display = 'block';
-                showNotification('Quote berhasil dibuat!');
-            };
-            resultImage.onerror = function() {
-                loading.style.display = 'none';
-                showNotification('Error memuat gambar. Coba lagi nanti.');
-            };
-        } catch (error) {
-            console.error('Error:', error);
-            loading.style.display = 'none';
-            showNotification('Terjadi kesalahan: ' + error.message);
-        }
-    }
-    
-    async function generateTweetImage() {
-        loading.style.display = 'block';
-        clearResults();
-        try {
-            const profile = "https%3A%2F%2Ffiles.catbox.moe%2Fr2oyr8.png";
-            const name = encodeURIComponent(document.getElementById('profileName').value);
-            const username = encodeURIComponent(document.getElementById('username').value);
-            const tweet = encodeURIComponent(document.getElementById('tweetText').value);
-            const theme = document.getElementById('tweetTheme').value;
-            const retweets = document.getElementById('retweets').value;
-            const quotes = document.getElementById('quotes').value;
-            const likes = document.getElementById('likes').value;
-            
-            const apiUrl = `https://api.siputzx.my.id/api/m/tweet?profile=${profile}&name=${name}&username=${username}&tweet=${tweet}&image=null&theme=${theme}&retweets=${retweets}&quotes=${quotes}&likes=${likes}&client=Twitter%20for%20iPhone`;
-            
-            resultImage.src = apiUrl;
-            resultImage.onload = function() {
-                loading.style.display = 'none';
-                resultImage.style.display = 'block';
-                resultButtons.style.display = 'block';
-                showNotification('Tweet berhasil dibuat!');
-            };
-            resultImage.onerror = function() {
-                loading.style.display = 'none';
-                showNotification('Error memuat gambar. Coba lagi nanti.');
-            };
-        } catch (error) {
-            console.error('Error:', error);
-            loading.style.display = 'none';
-            showNotification('Terjadi kesalahan: ' + error.message);
-        }
-    }
-    
-    async function generateFbComment() {
-        loading.style.display = 'block';
-        clearResults();
-        try {
-            const fbText = document.getElementById('fbText').value;
-            const parts = fbText.split(' ');
-            const name = parts[0];
-            const comment = parts.slice(1).join(' ');
-            
-            const apiUrl = `https://api.sxtream.xyz/maker/fake-chat-fb?name=${encodeURIComponent(name)}&comment=${encodeURIComponent(comment)}&profileUrl=https%3A%2F%2Ffiles.catbox.moe%2Ff7g0nx.jpg`;
-            
-            resultImage.src = apiUrl;
-            resultImage.onload = function() {
-                loading.style.display = 'none';
-                resultImage.style.display = 'block';
-                resultButtons.style.display = 'block';
-                showNotification('FB Comment berhasil dibuat!');
-            };
-            resultImage.onerror = function() {
-                loading.style.display = 'none';
-                showNotification('Error memuat gambar. Coba lagi nanti.');
-            };
-        } catch (error) {
-            console.error('Error:', error);
-            loading.style.display = 'none';
-            showNotification('Terjadi kesalahan: ' + error.message);
-        }
-    }
-    
-    async function checkPhoneHoki() {
-        loading.style.display = 'block';
-        clearResults();
-        try {
-            const phoneNumber = document.getElementById('phoneNumber').value;
-            const apiUrl = `https://api.siputzx.my.id/api/primbon/nomorhoki?phoneNumber=${encodeURIComponent(phoneNumber)}`;
-            
-            const response = await fetch(apiUrl);
-            const data = await response.json();
-            loading.style.display = 'none';
-            
-            if (data && data.status) {
-                textResult.style.display = 'block';
-                textResult.innerHTML = `
-                    <h4>Hasil Cek Hoki untuk ${phoneNumber}:</h4>
-                    <pre>${JSON.stringify(data, null, 2)}</pre>
-                `;
-                resultButtons.style.display = 'block';
-                showNotification('Cek hoki berhasil!');
-            } else {
-                showNotification('Tidak dapat membaca hasil cek hoki.');
-            }
-        } catch (error) {
-            console.error('Error:', error);
-            loading.style.display = 'none';
-            showNotification('Terjadi kesalahan: ' + error.message);
-        }
-    }
-    
-    async function searchSpotifyTracks() {
-        loading.style.display = 'block';
-        clearResults();
-        try {
-            const query = document.getElementById('spotifyQuery').value;
-            const apiUrl = `https://api.siputzx.my.id/api/s/spotify?query=${encodeURIComponent(query)}`;
-            
-            const response = await fetch(apiUrl);
-            const data = await response.json();
-            loading.style.display = 'none';
-            
-            if (data && data.data && data.data.length > 0) {
-                const tracks = data.data;
-                spotifyResult.style.display = 'block';
-                let html = `<h4>Hasil Pencarian untuk "${query}":</h4>`;
-                tracks.slice(0, 5).forEach(track => {
-                    html += `
-                        <div class="track-item">
-                            <strong>${track.name}</strong><br>
-                            <span>Artis: ${track.artists || 'Tidak diketahui'}</span><br>
-                            <span>Album: ${track.album || 'Tidak diketahui'}</span><br>
-                            <span>Durasi: ${track.duration || 'Tidak diketahui'}</span>
-                        </div>
-                    `;
-                });
-                spotifyResult.innerHTML = html;
-                resultButtons.style.display = 'block';
-                showNotification('Pencarian Spotify berhasil!');
-            } else {
-                showNotification('Tidak ada hasil ditemukan di Spotify.');
-            }
-        } catch (error) {
-            console.error('Error:', error);
-            loading.style.display = 'none';
-            showNotification('Terjadi kesalahan: ' + error.message);
-        }
-    }
-    
-    function clearResults() {
-        resultImage.style.display = 'none';
-        textResult.style.display = 'none';
-        textResult.innerHTML = '';
-        spotifyResult.style.display = 'none';
-        spotifyResult.innerHTML = '';
-        resultButtons.style.display = 'none';
-    }
-    
-    function showNotification(message) {
-        notificationText.textContent = message;
-        notification.classList.add('show');
-        setTimeout(() => {
-            notification.classList.remove('show');
-        }, 3000);
-    }
-    
-    
-    const now = new Date();
-    const hours = now.getHours().toString().padStart(2, '0');
-    const minutes = now.getMinutes().toString().padStart(2, '0');
-    document.getElementById('timeValue').value = `${hours}:${minutes}`;
-});
-    </script>
+  <div class="section">
+    <label for="grup"> Pilih Grup / Channel</label>
+    <select id="grup"><option disabled selected>Belum dimuat</option></select>
+  </div>
+
+  <div class="section">
+    <label for="pesan"> Kirim Pesan ke Grup / Channel</label>
+    <textarea id="pesan" placeholder="Isi pesan di sini..."></textarea>
+    <button class="btn" id="sendGroupBtn" style="margin-top:10px">Kirim Pesan</button>
+  </div>
+
+  <div class="section">
+    <label for="newTitle"> Ganti Nama Grup / Channel</label>
+    <input id="newTitle" type="text" placeholder="Nama baru...">
+    <button class="btn" id="changeTitleBtn" style="margin-top:10px">Ganti Nama</button>
+  </div>
+
+  <div class="section">
+    <label for="foto"> Ganti Foto Grup / Channel</label>
+    <input id="foto" type="file" accept="image/*">
+    <button class="btn" id="updatePhotoBtn" style="margin-top:10px">Perbarui Foto</button>
+  </div>
+
+  <div class="section">
+    <label for="toUserId"> Kirim Pesan ke User / ID</label>
+    <input id="toUserId" type="text" placeholder="Masukkan id atau @username">
+    <textarea id="toUserMsg" placeholder="Pesan ke user..." style="margin-top:8px"></textarea>
+    <button class="btn" id="sendUserBtn" style="margin-top:10px">Kirim ke User</button>
+  </div>
+
+  <div class="section">
+    <label for="newBotName"> Ganti Nama Bot</label>
+    <input id="newBotName" type="text" placeholder="Masukkan nama bot baru">
+    <button class="btn" id="setBotNameBtn" style="margin-top:10px">Ganti Nama Bot</button>
+  </div>
+
+  <div class="section">
+    <label for="idSpam"> Spam Bot</label>
+    <input id="idSpam" type="text" placeholder="ID Penerima / @username">
+    <input id="jumlahSpam" type="number" min="1" placeholder="Jumlah pesan">
+    <textarea id="pesanSpam" placeholder="Pesan spam..."></textarea>
+    <button class="btn" id="spamBtn" style="margin-top:10px;background:linear-gradient(90deg,#ff4444,#ff8888);color:#fff;">Mulai Spam</button>
+  </div>
+
+  <div class="section">
+    <h3 style="margin-top:0">Log Aktivitas</h3>
+    <div id="status" class="small">Menunggu aksi...</div>
+    <div id="log" class="log"></div>
+  </div>
+
+  <div class="footer">GusOfcXD 404</div>
+</div>
+
+<script>
+function apiUrl(token,method){return`https://api.telegram.org/bot${encodeURIComponent(token)}/${method}`}
+function log(t){const l=document.getElementById('log');const s=document.getElementById('status');const time=new Date().toLocaleTimeString();l.innerText=`[${time}] ${t}\n`+l.innerText;s.innerText=t}
+async function safeFetch(url,opt){try{const r=await fetch(url,opt);return await r.json()}catch(e){return{ok:false,error:e.message}}}
+
+document.getElementById('loadChatsBtn').onclick=async()=>{
+ const token=document.getElementById('token').value.trim()
+ if(!token)return log('Token kosong!')
+ log('Memuat daftar chat...')
+ const data=await safeFetch(apiUrl(token,'getUpdates'))
+ const select=document.getElementById('grup');select.innerHTML=''
+ if(!data.ok)return log('Gagal: '+(data.description||data.error))
+ const found=new Map()
+ for(const u of data.result||[]){const m=u.message||u.channel_post;if(!m)continue;const c=m.chat;if(!c)continue;found.set(c.id,{id:c.id,name:c.title||c.username||c.first_name,type:c.type})}
+ if(found.size===0)return log('Tidak ada chat ditemukan.')
+ for(const [k,v] of found){const o=document.createElement('option');o.value=v.id;o.textContent=`${v.name} (${v.type})`;select.appendChild(o)}
+ log('Chat berhasil dimuat.')
+}
+
+document.getElementById('clearBtn').onclick=()=>{
+ document.getElementById('token').value=''
+ document.getElementById('grup').innerHTML='<option disabled selected>Belum dimuat</option>'
+ log('Form dikosongkan.')
+}
+
+document.getElementById('sendGroupBtn').onclick=async()=>{
+ const t=document.getElementById('token').value.trim(),g=document.getElementById('grup').value,p=document.getElementById('pesan').value
+ if(!t||!g||!p)return log('Lengkapi data.')
+ const r=await safeFetch(apiUrl(t,'sendMessage'),{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({chat_id:g,text:p})})
+ r.ok?log('Pesan dikirim.'):log('Gagal: '+JSON.stringify(r))
+}
+
+document.getElementById('changeTitleBtn').onclick=async()=>{
+ const t=document.getElementById('token').value.trim(),g=document.getElementById('grup').value,n=document.getElementById('newTitle').value
+ if(!t||!g||!n)return log('Lengkapi data.')
+ const r=await safeFetch(apiUrl(t,'setChatTitle'),{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({chat_id:g,title:n})})
+ r.ok?log('Nama diganti.'):log('Gagal: '+JSON.stringify(r))
+}
+
+document.getElementById('updatePhotoBtn').onclick=async()=>{
+ const t=document.getElementById('token').value.trim(),g=document.getElementById('grup').value,f=document.getElementById('foto').files[0]
+ if(!t||!g||!f)return log('Lengkapi data.')
+ log('Mengganti foto grup/channel...')
+ const form=new FormData();form.append('chat_id',g);form.append('photo',f)
+ try{
+   const r=await fetch(apiUrl(t,'setChatPhoto'),{method:'POST',body:form})
+   const j=await r.json()
+   j.ok?log('Foto grup berhasil diperbarui.'):log('Gagal update foto: '+JSON.stringify(j))
+ }catch(e){log('Error: '+e.message)}
+}
+
+document.getElementById('sendUserBtn').onclick=async()=>{
+ const t=document.getElementById('token').value.trim(),id=document.getElementById('toUserId').value.trim(),msg=document.getElementById('toUserMsg').value.trim()
+ if(!t||!id||!msg)return log('Lengkapi data.')
+ const r=await safeFetch(apiUrl(t,'sendMessage'),{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({chat_id:id,text:msg})})
+ r.ok?log('Pesan ke user terkirim.'):log('Gagal kirim: '+JSON.stringify(r))
+}
+
+document.getElementById('setBotNameBtn').onclick=async()=>{
+ const t=document.getElementById('token').value.trim(),n=document.getElementById('newBotName').value.trim()
+ if(!t||!n)return log('Lengkapi data.')
+ const r=await safeFetch(apiUrl(t,'setMyName'),{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({name:n})})
+ r.ok?log('Nama bot diperbarui.'):log('Gagal: '+JSON.stringify(r))
+}
+
+document.getElementById('spamBtn').onclick=async()=>{
+ const t=document.getElementById('token').value.trim(),id=document.getElementById('idSpam').value.trim(),j=parseInt(document.getElementById('jumlahSpam').value||'0'),m=document.getElementById('pesanSpam').value.trim()
+ if(!t||!id||!m||j<1)return log('Lengkapi data spam.')
+ if(!confirm('Yakin kirim '+j+' pesan ke '+id+'?'))return
+ for(let i=0;i<j;i++){
+   const r=await safeFetch(apiUrl(t,'sendMessage'),{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({chat_id:id,text:m})})
+   if(!r.ok){log('Gagal pada pesan ke-'+(i+1));break}
+   await new Promise(r=>setTimeout(r,500))
+ }
+ log('Spam selesai.')
+}
+</script>
 </body>
-</html>
