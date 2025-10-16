@@ -1,1 +1,200 @@
-<h1>website ini lagi di update, jadi tunggu ya sir<h1>
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GusOfcXD 404</title>
+<style>
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-image: url('https://files.catbox.moe/fegi4m.jpg');
+    background-size: cover;
+    background-position: center;
+    color: #fff;
+    overflow: hidden;
+}
+header {
+    display: flex;
+    justify-content: flex-end;
+    padding: 20px;
+}
+.menu {
+    cursor: pointer;
+    font-size: 24px;
+    user-select: none;
+    text-align: center;
+}
+.menu span {
+    display: block;
+    height: 4px;
+    width: 25px;
+    margin: 4px 0;
+    background: #00cfff;
+    border-radius: 2px;
+    transition: all 0.3s;
+}
+.menu:hover span {
+    background: #ff0;
+}
+.container {
+    max-width: 500px;
+    margin: 50px auto;
+    padding: 20px;
+    background: rgba(0,0,0,0.6);
+    border-radius: 15px;
+    text-align: center;
+    box-shadow: 0 0 20px rgba(0,255,255,0.5);
+}
+.container img.profile {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    border: 3px solid #00cfff;
+    margin-bottom: 20px;
+    transition: transform 0.3s;
+}
+.container img.profile:hover {
+    transform: scale(1.05);
+}
+.links a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 10px 0;
+    text-decoration: none;
+    color: #00cfff;
+    font-weight: bold;
+    transition: 0.3s;
+}
+.links a img {
+    width: 24px;
+    height: 24px;
+    margin-right: 10px;
+    transition: transform 0.3s;
+}
+.links a:hover {
+    color: #ff0;
+}
+.links a:hover img {
+    transform: rotate(20deg) scale(1.2);
+}
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.85);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+.overlay.active {
+    visibility: visible;
+    opacity: 1;
+}
+.panel {
+    background: rgba(0,0,0,0.9);
+    padding: 30px;
+    border-radius: 15px;
+    max-width: 400px;
+    width: 90%;
+    text-align: center;
+    box-shadow: 0 0 20px rgba(0,255,255,0.5);
+    color: #00cfff;
+    font-size: 18px;
+    line-height: 1.6;
+}
+.typing {
+    border-right: 2px solid #00cfff;
+    display: inline;
+    white-space: pre-wrap;
+    overflow: hidden;
+}
+.close-btn {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    font-size: 28px;
+    color: #00cfff;
+    cursor: pointer;
+    transition: 0.3s;
+}
+.close-btn:hover {
+    color: #ff0;
+}
+</style>
+</head>
+<body>
+
+<header>
+    <div class="menu" id="menuButton" onclick="showOverlay()">
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+</header>
+
+<div class="container">
+    <img class="profile" src="https://files.catbox.moe/fegi4m.jpg" alt="Profil GusOfcXD">
+    <div class="links">
+        <a href="https://t.me/chanellinkgusofcxd" target="_blank">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg" alt="Telegram">Telegram
+        </a>
+        <a href="https://github.com/GUSxOFC" target="_blank">
+            <img src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" alt="GitHub">GitHub
+        </a>
+        <a href="https://www.tiktok.com/@guswangsaff" target="_blank">
+            <img src="https://upload.wikimedia.org/wikipedia/en/6/69/TikTok_logo.svg" alt="TikTok">TikTok
+        </a>
+    </div>
+</div>
+
+<div class="overlay" id="overlay">
+    <div class="panel">
+        <span class="close-btn" onclick="closeOverlay()">×</span>
+        <p class="typing" id="typingText"></p>
+    </div>
+</div>
+
+<script>
+const textContent = `
+Saya adalah GusOfcXD 404
+Saya berumur 16 tahun
+Saya tinggal di Sulawesi Selatan, kabupaten Gowa Batummenteng, kota Makassar, saya sudah tidak sekolah
+Dan kegiatan saya tiap hari cuma melihat Telegram sama TikTok`
+
+let typingIndex = 0
+
+function showOverlay() {
+    const overlay = document.getElementById('overlay')
+    overlay.classList.add('active')
+    startTyping()
+}
+
+function closeOverlay() {
+    const overlay = document.getElementById('overlay')
+    overlay.classList.remove('active')
+}
+
+function startTyping() {
+    const typingElement = document.getElementById('typingText')
+    typingElement.textContent = ''
+    typingIndex = 0
+    function type() {
+        if (typingIndex < textContent.length) {
+            typingElement.textContent += textContent[typingIndex]
+            typingIndex++
+            setTimeout(type, 50)
+        }
+    }
+    type()
+}
+</script>
+
+</body>
+  </html>
