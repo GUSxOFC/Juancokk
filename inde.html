@@ -1,0 +1,247 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>GusOfcXD 404</title>
+  <meta name="theme-color" content="#08121a"/>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg-dark-1:#02060a;
+      --bg-dark-2:#071823;
+      --accent-a:#00e5ff;
+      --accent-b:#7b2eff;
+      --card-radius:18px;
+      --glass: rgba(255,255,255,0.03);
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%;margin:0;font-family:'Poppins',system-ui,-apple-system,Segoe UI,Roboto,'Helvetica Neue',Arial;color:#dff9ff}
+    body{
+      background:
+        radial-gradient(600px 400px at 10% 10%, rgba(0,229,255,0.04), transparent 8%),
+        radial-gradient(500px 350px at 90% 85%, rgba(123,46,255,0.03), transparent 10%),
+        linear-gradient(180deg,var(--bg-dark-1),var(--bg-dark-2));
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      overflow-y:auto;
+      transition: background .6s ease, color .4s ease;
+    }
+    .particles { position:fixed; inset:0; pointer-events:none; z-index:0; background-image:
+      radial-gradient(circle at 20% 15%, rgba(0,229,255,0.03) 0, transparent 6%),
+      radial-gradient(circle at 80% 85%, rgba(123,46,255,0.03) 0, transparent 6%); mix-blend-mode:screen; }
+    .wrap { position:relative; z-index:2; max-width:980px; margin:34px auto; padding:28px; }
+    .header { display:flex; gap:18px; align-items:center; }
+    .avatar { width:72px; height:72px; border-radius:999px; overflow:hidden; box-shadow:0 8px 40px rgba(0,0,0,0.6), 0 0 18px rgba(0,229,255,0.06); border:2px solid rgba(255,255,255,0.04); }
+    .avatar img{width:100%;height:100%;object-fit:cover;display:block}
+    h1{font-size:20px;margin:0;letter-spacing:0.2px}
+    .sub{font-size:12px;opacity:0.9;margin-top:6px;color:#cfefff}
+    .card {
+      margin-top:18px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      border-radius:var(--card-radius);
+      padding:20px;
+      box-shadow: 0 12px 50px rgba(2,6,12,0.7);
+      border: 1px solid rgba(255,255,255,0.03);
+      position:relative;
+      overflow:hidden;
+    }
+    .card .edge { position:absolute; inset:0; pointer-events:none; z-index:0; background: linear-gradient(90deg, transparent, rgba(0,229,255,0.04), transparent); mask-image: linear-gradient(to bottom, rgba(0,0,0,1), rgba(0,0,0,0.6)); }
+    .grid3 { display:grid; grid-template-columns:repeat(3,1fr); gap:12px; z-index:2; position:relative; }
+    .field {
+      background: linear-gradient(180deg, rgba(0,0,0,0.24), rgba(255,255,255,0.01));
+      border:1px solid rgba(255,255,255,0.03);
+      padding:12px 14px; border-radius:12px; color:inherit; outline:none; font-size:14px;
+    }
+    .field::placeholder{ color:rgba(210,250,255,0.42); }
+    .reasons { display:flex; gap:12px; margin-top:14px; z-index:2; }
+    .btn-reason { padding:10px 14px; border-radius:10px; background:rgba(255,255,255,0.02); border:1px solid rgba(255,255,255,0.03); cursor:pointer; font-weight:600; font-size:13px; color:#e6faff; }
+    .btn-reason.selected { background: linear-gradient(180deg, rgba(123,46,255,0.08), rgba(0,229,255,0.04)); box-shadow: 0 10px 40px rgba(106,0,255,0.08); border-color: rgba(123,46,255,0.26); transform:translateY(-4px); }
+    .actions { display:flex; gap:12px; margin-top:18px; align-items:center; z-index:2; }
+    .btn { cursor:pointer; user-select:none; padding:12px 18px; border-radius:12px; border:0; font-weight:700; letter-spacing:0.4px; position:relative; overflow:hidden; }
+    .btn.primary { background: linear-gradient(90deg,var(--accent-a), var(--accent-b)); color:#00131a; box-shadow: 0 12px 40px rgba(0,229,255,0.14), 0 3px 10px rgba(0,0,0,0.6); }
+    .btn.ghost { background:transparent; border:1px solid rgba(255,255,255,0.04); color:#dffaff; }
+    .btn::after { content:''; position:absolute; left:-40%; top:-60%; width:220%; height:220%; background: radial-gradient(circle at 20% 20%, rgba(255,255,255,0.16), transparent 18%); transform:rotate(25deg) translateY(0); opacity:0.06; transition:opacity .25s, transform .35s; }
+    .btn:hover::after { opacity:0.18; transform:rotate(25deg) translateY(-8px); }
+    .streak { position:absolute; inset:0; pointer-events:none; z-index:1; background-image: linear-gradient(120deg, rgba(255,255,255,0.02) 0%, rgba(255,255,255,0.06) 6%, rgba(255,255,255,0.02) 12%, transparent 14%); transform:translateX(-120%); transition: transform .65s cubic-bezier(.2,.9,.3,1), opacity .25s; opacity:0; }
+    .btn.flash .streak { transform:translateX(0%); opacity:1; }
+    .themeToggle { padding:8px 12px; border-radius:10px; background:rgba(255,255,255,0.02); border:1px solid rgba(255,255,255,0.03); color:#dffaff; cursor:pointer; font-weight:600; }
+    .foot { margin-top:16px; font-size:12px; opacity:0.78; text-align:center; color:#cdefff; z-index:2; }
+    @media (max-width:880px){ .grid3{ grid-template-columns:1fr; } .reasons{ flex-direction:column; } .actions{ flex-direction:column; } }
+    body.light { color:#07202a; background: radial-gradient(600px 400px at 10% 10%, rgba(122,217,255,0.06), transparent 8%), radial-gradient(500px 350px at 90% 85%, rgba(181,120,255,0.04), transparent 10%), linear-gradient(180deg,#f7fbff,#eaf7ff); }
+    body.light .card { background: linear-gradient(180deg, rgba(255,255,255,0.9), rgba(250,250,255,0.96)); color:#062028; box-shadow: 0 12px 40px rgba(6,32,40,0.06); }
+    body.light .field { background: linear-gradient(180deg,#fff,#fbfdff); color:#062028; border:1px solid rgba(6,32,40,0.04); }
+    body.light .btn { color:#062028; }
+    .logoFloat { animation: floaty 5s ease-in-out infinite; }
+    @keyframes floaty { 0%{ transform:translateY(0) } 50%{ transform:translateY(-8px) } 100%{ transform:translateY(0) } }
+  </style>
+</head>
+<body>
+  <div class="particles" aria-hidden="true"></div>
+
+  <div class="wrap" role="main" aria-labelledby="title">
+    <header class="header" style="z-index:2">
+      <div class="avatar logoFloat"><img src="https://files.catbox.moe/q9179r.jpg" alt="profile"></div>
+      <div style="flex:1">
+        <h1 id="title">GusOfcXD 404</h1>
+        <div class="sub">Unband wangcap</div>
+      </div>
+      <div style="display:flex;gap:8px;align-items:center">
+        <button id="themeBtn" class="themeToggle" aria-pressed="false">Noite Blanca</button>
+      </div>
+    </header>
+
+    <main class="card" aria-label="isi lengkap yang di bwah" style="margin-top:16px;">
+      <div class="edge" aria-hidden="true"></div>
+
+      <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap; z-index:2">
+        <strong style="font-size:16px">Formulir Permintaan Unban</strong>
+        <small style="font-size:12px; opacity:0.9">Hopefully<strong>success bro</strong></small>
+      </div>
+
+      <form id="form" onsubmit="return false" style="margin-top:14px; z-index:2; position:relative">
+        <div class="grid3" aria-hidden="false">
+          <input id="phone" class="field" type="tel" inputmode="tel" placeholder="your number, for example 62812... atau 0812...)" required />
+          <input id="email" class="field" type="email" placeholder="your email" required />
+          <input id="username" class="field" type="text" placeholder="Your username" required />
+        </div>
+
+        <div class="reasons" role="tablist" aria-label="Pilihan alasan">
+          <div id="rSpam" class="btn-reason selected" role="tab" tabindex="0" aria-selected="true">Kena banned karena spam</div>
+          <div id="rPerm" class="btn-reason" role="tab" tabindex="0" aria-selected="false">Kena banned permanen</div>
+        </div>
+
+        <div class="actions" style="margin-top:18px;">
+
+          <button id="btnMailto" class="btn ghost" type="button" title="Fallback: buka aplikasi email (mailto:)">
+            UNBANNED
+            <span class="streak" aria-hidden="true"></span>
+          </button>
+
+          <button id="btnCopy" class="btn ghost" type="button" title="Salin pesan ke clipboard">Salin Pesan</button>
+        </div>
+
+        <div style="margin-top:12px; font-size:13px; color:rgba(255,255,255,0.78); z-index:2">
+          INFO : If you are still not unbanned, please use different emails in 5/3 emails, and wait for the process from WhatsApp support. 
+        </div>
+      </form>
+
+      <div class="foot">This html was created to help your WhatsApp account which has been banned</div>
+    </main>
+  </div>
+
+  <script>
+    const SUPPORT_EMAIL = 'support@whatsapp.com';
+    const rSpam = document.getElementById('rSpam');
+    const rPerm = document.getElementById('rPerm');
+    const btnMailto = document.getElementById('btnMailto');
+    const btnCopy = document.getElementById('btnCopy');
+    const phoneEl = document.getElementById('phone');
+    const emailEl = document.getElementById('email');
+    const usernameEl = document.getElementById('username');
+    const themeBtn = document.getElementById('themeBtn');
+
+    let reason = 'spam';
+    function selectReason(r){
+      reason = r;
+      if(r==='spam'){ rSpam.classList.add('selected'); rSpam.setAttribute('aria-selected','true'); rPerm.classList.remove('selected'); rPerm.setAttribute('aria-selected','false'); }
+      else { rPerm.classList.add('selected'); rPerm.setAttribute('aria-selected','true'); rSpam.classList.remove('selected'); rSpam.setAttribute('aria-selected','false'); }
+    }
+    rSpam.addEventListener('click', ()=> selectReason('spam'));
+    rPerm.addEventListener('click', ()=> selectReason('permanent'));
+    rSpam.addEventListener('keyup',(e)=>{ if(e.key==='Enter') selectReason('spam') });
+    rPerm.addEventListener('keyup',(e)=>{ if(e.key==='Enter') selectReason('permanent') });
+
+    function buildMessage({phone, email, username, reasonType}){
+      const name = username && username.trim() ? username.trim() : 'Pengguna';
+      const ph = phone && phone.trim() ? phone.trim() : '[nomor Anda]';
+      const mail = email && email.trim() ? email.trim() : '[email Anda]';
+
+      if(reasonType === 'spam'){
+        return `Halo dukungan WhatsApp yang terhormat,
+
+Saya mengajukan permohonan peninjauan atas pemblokiran akun WhatsApp dengan nomor ${ph}. Pemberitahuan yang saya terima menyebutkan adanya indikasi aktivitas spam. Saya ingin menyampaikan kronologi singkat dan meminta pemeriksaan lebih lanjut karena saya percaya ini merupakan kesalahan atau false-positive.
+
+Akun ini saya gunakan untuk komunikasi pribadi dan beberapa komunikasi terkait pekerjaan. Saya tidak melakukan kegiatan yang bertujuan mengirim pesan massal yang mengganggu atau menyebarkan konten berbahaya. Jika terdapat konfigurasi pihak ketiga atau layanan otomatis yang menyebabkan pengiriman pesan, saya bersedia membantu memberikan informasi lengkap dan bekerja sama untuk mengidentifikasi sumbernya.
+
+Saya mohon tim dapat meninjau log dan alasan pemblokiran, serta memberi tahu bukti atau contoh pesan yang memicu tindakan ini. Saya berkomitmen untuk mematuhi kebijakan WhatsApp dan akan segera mengambil langkah perbaikan jika ditemukan penyimpangan.
+
+Informasi akun:
+• Nomor: ${ph}
+• Email: ${mail}
+• Nama / Username: ${name}
+
+Mohon panduan langkah lanjutan dan dokumen atau bukti tambahan yang perlu saya lampirkan untuk proses banding. Saya sangat menghargai bantuan dan perhatian tim.
+
+Terima kasih atas waktu dan pertimbangannya.
+
+Hormat saya,
+${name}`;
+      } else {
+        return `Halo dukungan WhatsApp yang terhormat,
+
+Dengan ini saya memohon pertimbangan atas pemblokiran permanen pada akun WhatsApp bernomor ${ph}. Saya memahami bahwa pemblokiran permanen dapat diambil untuk pelanggaran serius terhadap kebijakan platform, namun saya memohon kesempatan untuk menjelaskan konteks dan situasi yang terjadi.
+
+Akun ini memiliki peran penting dalam komunikasi keseharian saya, termasuk koordinasi keluarga dan pekerjaan. Jika terdapat aktivitas yang menyebabkan pelanggaran, saya bersedia menjelaskan secara rinci, menyerahkan bukti penggunaan, atau memperbaiki konfigurasi pihak ketiga yang mungkin terhubung ke akun saya. Saya juga siap mengikuti arahan teknis atau prosedural yang diminta tim dukungan.
+
+Informasi akun:
+• Nomor: ${ph}
+• Email: ${mail}
+• Nama / Username: ${name}
+
+Mohon berkenan memberikan instruksi mengenai bukti yang perlu diserahkan dan langkah pemulihan yang memungkinkan. Saya sangat menghargai waktu serta kebijaksanaan tim dalam menangani permohonan ini.
+
+Terima kasih atas perhatian dan kesempatan untuk mengajukan banding.
+
+Hormat saya,
+${name}`;
+      }
+    }
+
+    function openMailto(to, subject, body){
+      const mailto = `mailto:${encodeURIComponent(to)}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+      window.location.href = mailto;
+    }
+
+    function flashButton(btn){
+      btn.classList.add('flash');
+      setTimeout(()=> btn.classList.remove('flash'), 900);
+    }
+
+    btnMailto.addEventListener('click', () => {
+      const phone = phoneEl.value.trim();
+      const email = emailEl.value.trim();
+      const username = usernameEl.value.trim() || 'Pengguna';
+      if(!phone || !email){ alert('Isi Nomor telepon dan Email dulu.'); return; }
+      const message = buildMessage({phone, email, username, reasonType: reason});
+      flashButton(btnMailto);
+      openMailto(SUPPORT_EMAIL, 'Permohonan Unban Akun WhatsApp', message);
+    });
+
+    btnCopy.addEventListener('click', async () => {
+      const phone = phoneEl.value.trim();
+      const email = emailEl.value.trim();
+      const username = usernameEl.value.trim() || 'Pengguna';
+      if(!phone || !email){ alert('Isi Nomor telepon dan Email dulu.'); return; }
+      const message = buildMessage({phone, email, username, reasonType: reason});
+      try {
+        await navigator.clipboard.writeText(message);
+        btnCopy.textContent = 'Tersalin!';
+        setTimeout(()=> btnCopy.textContent = 'Salin Pesan', 1400);
+      } catch(e){
+        btnCopy.textContent = 'Gagal Salin';
+        setTimeout(()=> btnCopy.textContent = 'Salin Pesan', 1400);
+      }
+    });
+
+    themeBtn.addEventListener('click', () => {
+      const isLight = document.body.classList.toggle('light');
+      themeBtn.textContent = isLight ? 'Noite Negra' : 'Noite Blanca';
+      themeBtn.setAttribute('aria-pressed', String(isLight));
+    });
+
+    [phoneEl, emailEl, usernameEl].forEach(el => { el.addEventListener('keydown', e => { if(e.key === 'Enter') e.preventDefault(); }); });
+    [rSpam, rPerm, btnMailto, btnCopy, themeBtn].forEach(el => { el.addEventListener('keyup', (e) => { if(e.key === ' ' || e.key === 'Enter') el.click(); }); });
+  </script>
+</body>
+  </html>
