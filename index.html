@@ -1,128 +1,66 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Play Music - GusOfcXD 404</title>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>GusOfcXD</title>
 <style>
-body{
-  margin:0; padding:0; font-family:Arial,sans-serif; background:#000; color:#fff;
-  min-height:100vh; display:flex; flex-direction:column; align-items:center; justify-content:flex-start;
-  background:url('https://files.catbox.moe/rryzbu.jpg') center/cover no-repeat; position:relative;
-}
-body::after{
-  content:""; position:fixed; inset:0; background:linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.6)); backdrop-filter:blur(14px); z-index:0;
-}
-.app{
-  position:relative; z-index:1; width:100%; max-width:720px; text-align:center; padding:28px 18px;
-}
-.ownerProfile{
-  margin-bottom:12px; display:flex; flex-direction:column; align-items:center; animation:fadeIn 1s ease forwards;
-}
-.ownerProfile img{
-  width:140px; height:140px; border-radius:50%; border:3px solid #fff; object-fit:cover; box-shadow:0 0 18px rgba(255,255,0,0.5); animation:pop 0.5s ease forwards;
-}
-.ownerProfile h2{margin:6px 0;font-size:1.5rem;color:#ffdd00; text-shadow:0 0 8px #ffdd00;}
-.ownerProfile p{margin:4px 0;font-size:0.95rem;opacity:0.85; text-align:center; max-width:80%;}
-input{
-  width:80%; padding:12px; border-radius:999px; border:none; outline:none; font-size:1rem; margin-bottom:12px;
-  background:rgba(255,255,255,0.03); color:#fff; text-align:center; transition:0.3s; box-shadow:0 4px 12px rgba(0,0,0,0.4);
-}
-input:focus{background:rgba(255,255,255,0.06); box-shadow:0 0 18px rgba(255,255,255,0.6);}
-.btnPlay{
-  padding:10px 20px; border-radius:999px; border:none; cursor:pointer; background:linear-gradient(135deg,#ff6b00,#ffdd00); color:#000;
-  font-weight:700; margin-bottom:20px; transition:0.3s; box-shadow:0 4px 12px rgba(255,130,0,0.4);
-}
-.btnPlay:hover{transform:scale(1.05); box-shadow:0 8px 24px rgba(255,200,0,0.6);}
-#message{text-align:center;margin:12px 0;font-size:1rem;opacity:0.9;}
-.trackInfo{
-  background:rgba(255,255,255,0.06); padding:16px; border-radius:12px; display:none; margin-top:12px; text-align:center;
-  animation:fadeIn 0.6s ease forwards; transition:all 0.5s;
-}
-.trackInfo img{width:100%;max-width:220px;border-radius:8px;margin-bottom:12px; animation:pop 0.4s ease forwards;}
-.trackInfo h3{margin:6px 0;color:#ffdd00; text-shadow:0 0 6px #ffdd00;}
-.trackInfo p{margin:4px 0;font-size:0.95rem;}
-.btnGroup{display:flex;justify-content:center;gap:12px;margin-top:8px;}
-.btnGroup button{
-  padding:8px 14px; border:none; border-radius:12px; cursor:pointer; font-weight:700; color:#000; transition:0.3s; box-shadow:0 4px 12px rgba(0,0,0,0.4);
-}
-#playBtn{background:linear-gradient(135deg,#00c8ff,#00ffea);}
-#playBtn:hover{transform:scale(1.08); box-shadow:0 0 20px #00ffea;}
-#downloadBtn{background:linear-gradient(135deg,#00c832,#00ff57);}
-#downloadBtn:hover{transform:scale(1.08); box-shadow:0 0 20px #00ff57;}
-@keyframes fadeIn{from{opacity:0;} to{opacity:1;}}
-@keyframes pop{0%{transform:scale(0);}100%{transform:scale(1);}}
+  :root{--accent1:#ff6b00;--accent2:#ffdd00}
+  *{box-sizing:border-box}
+  body{margin:0;font-family:Inter,Arial,Helvetica,sans-serif;background:#07070a;color:#fff;min-height:100vh;display:flex;align-items:center;justify-content:center}
+  .wrap{width:92%;max-width:980px;padding:28px;border-radius:14px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));box-shadow:0 18px 50px rgba(0,0,0,0.6);text-align:center}
+  h1{margin:0 0 8px;color:var(--accent2);text-shadow:0 6px 18px rgba(0,0,0,0.6)}
+  p.lead{margin:0 0 18px;color:#ddd;opacity:0.95}
+  .features{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));margin-top:18px}
+  .card{background:rgba(255,255,255,0.02);padding:14px;border-radius:12px;min-height:92px;display:flex;flex-direction:column;justify-content:space-between;align-items:center}
+  .card h3{margin:4px 0;color:var(--accent2)}
+  .btn{margin-top:10px;padding:10px 18px;border-radius:999px;border:none;cursor:pointer;background:linear-gradient(135deg,var(--accent1),var(--accent2));color:#000;font-weight:700;box-shadow:0 8px 30px rgba(255,130,0,0.12)}
+  .small{font-size:0.9rem;color:#ddd;opacity:0.9}
+  .logoRow{display:flex;gap:12px;align-items:center;justify-content:center;margin-top:18px}
+  .logo{width:72px;height:72px;border-radius:12px;background:url('https://files.catbox.moe/rryzbu.jpg') center/cover;border:3px solid rgba(255,255,255,0.06);box-shadow:0 8px 30px rgba(0,0,0,0.6)}
+  footer{margin-top:20px;font-size:0.85rem;color:#bbb}
+  @media(min-width:720px){.wrap{padding:36px}}
 </style>
 </head>
 <body>
-<div class="app">
-  <div class="ownerProfile">
-    <img src="https://files.catbox.moe/rryzbu.jpg" alt="Owner">
-    <h2>GusOfcXD 404</h2>
-    <p>Olá usuários do site, eu sou GusOfcXD, eu criei este site para vocês encontrarem suas músicas favoritas.</p>
-  </div>
-  <input type="text" id="q" placeholder="Digite o nome da música que você deseja procurar">
-  <button class="btnPlay" id="btn">Jogar</button>
-  <div id="message"></div>
-  <div class="trackInfo" id="trackInfo">
-    <img id="cover" src="" alt="Cover">
-    <h3 id="title"></h3>
-    <p><b>Artista:</b> <span id="artist"></span></p>
-    <p><b>Album:</b> <span id="album"></span></p>
-    <p><b>Duração:</b> <span id="duration"></span></p>
-    <div class="btnGroup">
-      <button id="playBtn">Putar</button>
-      <button id="downloadBtn">Download</button>
+  <main class="wrap" role="main">
+    <h1>Hi, welcome ke website GusOfcXD</h1>
+    <p class="lead">Temukan musik favoritmu cepat dan mudah. Pilih fitur di bawah untuk mulai.</p>
+
+    <div class="features" aria-label="fitur">
+      <div class="card">
+        <h3>Play Music</h3>
+        <div class="small">Cari, dengar preview, dan unduh preview lagu (5 hasil).</div>
+        <button class="btn" id="goPlay">Play Music</button>
+      </div>
+
+      <div class="card">
+        <h3>Contact</h3>
+        <div class="small">Admin: @gofcc404 (Telegram)</div>
+        <button class="btn" id="contactBtn">Chat Admin</button>
+      </div>
+
+      <div class="card">
+        <h3>Info</h3>
+        <div class="small">Página criada por GusOfcXD 404 — projeto simples para música.</div>
+      </div>
     </div>
-  </div>
-</div>
-<audio id="audio" controls style="display:none;"></audio>
+
+    <div class="logoRow" aria-hidden="true">
+      <div class="logo" title="GusOfcXD"></div>
+    </div>
+
+    <footer>© GusOfcXD 404</footer>
+  </main>
 
 <script>
-const btn=document.getElementById('btn');
-const q=document.getElementById('q');
-const message=document.getElementById('message');
-const trackInfo=document.getElementById('trackInfo');
-const cover=document.getElementById('cover');
-const title=document.getElementById('title');
-const artist=document.getElementById('artist');
-const album=document.getElementById('album');
-const duration=document.getElementById('duration');
-const playBtn=document.getElementById('playBtn');
-const downloadBtn=document.getElementById('downloadBtn');
-const audio=document.getElementById('audio');
-
-function formatMs(ms){if(!ms)return'-'; const s=Math.floor(ms/1000); const m=Math.floor(s/60); const sec=s%60; return`${m}:${sec.toString().padStart(2,'0')}`;}
-
-btn.addEventListener('click',async ()=>{
-  const term=q.value.trim();
-  if(!term){alert('Digite o nome da música!'); return;}
-  trackInfo.style.display='none';
-  message.textContent='Proses mencari lagu...';
-  await new Promise(r=>setTimeout(r,4000));
-  message.textContent='Lagu ditemukan, tunggu saya akan mengirimkan nya';
-  try{
-    const res=await fetch(`https://itunes.apple.com/search?term=${encodeURIComponent(term)}&entity=song&limit=1&country=BR`);
-    const data=await res.json();
-    if(data.results.length===0){message.textContent='Lagu tidak ditemukan'; return;}
-    const track=data.results[0];
-    cover.src=track.artworkUrl100.replace('100x100','500x500');
-    title.textContent=track.trackName;
-    artist.textContent=track.artistName;
-    album.textContent=track.collectionName||'-';
-    duration.textContent=formatMs(track.trackTimeMillis);
-    audio.src=track.previewUrl; audio.style.display='none';
-    trackInfo.style.display='block';
-
-    playBtn.onclick=()=>{audio.play();};
-    downloadBtn.onclick=()=>{
-      const link=document.createElement('a');
-      link.href='music-gusofcxd404.mp3';
-      link.download='music-gusofcxd404.mp3';
-      document.body.appendChild(link); link.click(); document.body.removeChild(link);
-    };
-  }catch(err){console.error(err); message.textContent='Terjadi kesalahan, coba lagi.';}
-});
+  document.getElementById('goPlay').addEventListener('click', ()=> {
+    // buka halaman fitur (sama folder)
+    window.location.href = 'playmusic.html';
+  });
+  document.getElementById('contactBtn').addEventListener('click', ()=> {
+    window.open('https://t.me/gofcc404','_blank');
+  });
 </script>
 </body>
-</html>
+  </html>
