@@ -1,103 +1,132 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pt-BR">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>GusOfcXD 404</title>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Track IP — GusOfcXD 404</title>
 <style>
 body {
   margin: 0;
-  font-family: 'Poppins', sans-serif;
-  background: radial-gradient(circle at top left, #111, #000);
+  font-family: Poppins, Arial, sans-serif;
+  background: radial-gradient(circle at top, #001429, #000);
   color: #fff;
+  min-height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: 100vh;
-  overflow: hidden;
 }
-.container {
-  width: 90%;
-  max-width: 420px;
-  background: rgba(255, 255, 255, 0.05);
-  border-radius: 20px;
-  padding: 30px;
-  box-shadow: 0 0 30px rgba(0, 0, 0, 0.6);
-  backdrop-filter: blur(10px);
+main {
+  width: 92%;
+  max-width: 600px;
+  padding: 32px;
+  background: rgba(255,255,255,0.05);
+  border-radius: 16px;
+  box-shadow: 0 0 25px rgba(0,255,255,0.15);
   text-align: center;
-  animation: fade 1.2s ease;
+  backdrop-filter: blur(6px);
+  animation: fadeIn 1.5s ease;
 }
-@keyframes fade {
-  from {opacity: 0; transform: translateY(20px);}
-  to {opacity: 1; transform: translateY(0);}
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 h1 {
-  font-size: 1.6em;
-  color: #00d0ff;
-  margin-bottom: 20px;
-  letter-spacing: 1px;
+  color: #00eaff;
+  margin-bottom: 8px;
 }
-.ip-info {
-  text-align: left;
-  line-height: 1.8em;
-  margin-top: 10px;
-  padding: 10px 0;
-  border-top: 1px solid rgba(255,255,255,0.1);
+p {
+  color: #cce6ff;
+  margin-bottom: 18px;
 }
-.btn-refresh {
-  margin-top: 20px;
-  padding: 10px 18px;
+input {
+  width: 80%;
+  padding: 10px;
+  border-radius: 8px;
   border: none;
-  border-radius: 10px;
-  background: linear-gradient(90deg, #00d0ff, #0066ff);
+  outline: none;
+  background: rgba(255,255,255,0.1);
   color: #fff;
-  font-weight: bold;
+  text-align: center;
+  font-size: 1em;
+}
+button {
+  margin-top: 14px;
+  padding: 10px 20px;
+  background: linear-gradient(90deg, #00d0ff, #006aff);
+  border: none;
+  color: #fff;
+  border-radius: 10px;
   cursor: pointer;
-  transition: all .3s ease;
+  font-weight: bold;
+  transition: 0.3s;
 }
-.btn-refresh:hover {
+button:hover {
   transform: scale(1.05);
-  box-shadow: 0 0 15px #00d0ff;
+  box-shadow: 0 0 15px #00eaff;
 }
-.footer {
+.result {
+  margin-top: 20px;
+  text-align: left;
+  background: rgba(255,255,255,0.05);
+  padding: 14px;
+  border-radius: 10px;
+  font-size: 0.95em;
+  display: none;
+}
+footer {
+  margin-top: 20px;
+  color: #b7eaff;
   font-size: 0.85em;
-  margin-top: 25px;
-  color: #aaa;
 }
 </style>
 </head>
 <body>
-<div class="container">
-  <h1>Track IP — GusOfcXD 404</h1>
-  <div class="ip-info" id="info">
-    Carregando informações do IP...
-  </div>
-  <button class="btn-refresh" onclick="getIP()">Atualizar</button>
-  <div class="footer">Powered by GusOfcXD</div>
-</div>
+  <main>
+    <h1>🌐 Trackear IP</h1>
+    <p>Digite o endereço IP que você deseja rastrear.</p>
+    <input type="text" id="ipInput" placeholder="Exemplo: 8.8.8.8">
+    <br>
+    <button id="trackBtn">Rastrear IP</button>
+
+    <div class="result" id="resultBox"></div>
+    <footer>GusOfcXD 404</footer>
+  </main>
+
 <script>
-async function getIP() {
-  const info = document.getElementById('info')
-  info.innerHTML = 'Buscando...'
-  try {
-    const res = await fetch('https://ipapi.co/json/')
-    const data = await res.json()
-    info.innerHTML = `
-      <b>Endereço IP:</b> ${data.ip}<br>
-      <b>País:</b> ${data.country_name} (${data.country_code})<br>
-      <b>Região:</b> ${data.region}<br>
-      <b>Cidade:</b> ${data.city}<br>
-      <b>Provedor:</b> ${data.org}<br>
-      <b>Latitude:</b> ${data.latitude}<br>
-      <b>Longitude:</b> ${data.longitude}<br>
-      <b>Fuso horário:</b> ${data.timezone}<br>
-      <b>Data e hora local:</b> ${new Date().toLocaleString()}
-    `
-  } catch (e) {
-    info.innerHTML = 'Falha ao buscar IP. Verifique sua conexão.'
+const trackBtn = document.getElementById('trackBtn');
+const ipInput = document.getElementById('ipInput');
+const resultBox = document.getElementById('resultBox');
+
+trackBtn.addEventListener('click', async ()=> {
+  const ip = ipInput.value.trim();
+  if (!ip) {
+    alert('Por favor, insira um endereço IP válido.');
+    return;
   }
-}
-getIP()
+  resultBox.style.display = 'block';
+  resultBox.innerHTML = '🔍 Rastreando IP...';
+
+  try {
+    const res = await fetch('https://ipapi.co/' + ip + '/json/');
+    const data = await res.json();
+    if (data.error) {
+      resultBox.innerHTML = '❌ IP inválido ou não encontrado.';
+      return;
+    }
+
+    resultBox.innerHTML = `
+      <strong>Endereço IP:</strong> ${data.ip}<br>
+      <strong>País:</strong> ${data.country_name} (${data.country_code})<br>
+      <strong>Região:</strong> ${data.region}<br>
+      <strong>Cidade:</strong> ${data.city}<br>
+      <strong>Provedor:</strong> ${data.org}<br>
+      <strong>Latitude:</strong> ${data.latitude}<br>
+      <strong>Longitude:</strong> ${data.longitude}
+    `;
+  } catch {
+    resultBox.innerHTML = '⚠️ Erro ao tentar rastrear. Verifique sua conexão.';
+  }
+});
 </script>
 </body>
 </html>
