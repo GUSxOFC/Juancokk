@@ -1,0 +1,347 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Play Music — GusOfcXD</title>
+<link rel="icon" href="https://files.catbox.moe/rryzbu.jpg">
+<style>
+  :root{--accent1:#ff6b00;--accent2:#ffdd00;--glass:rgba(255,255,255,0.06)}
+  *{box-sizing:border-box}
+  body{margin:0;font-family:Inter,Arial,Helvetica,sans-serif;background:#000;color:#fff;min-height:100vh;display:flex;flex-direction:column;align-items:center}
+  /* background image + blur layer */
+  .bg{
+    position:fixed;inset:0;background-image:url('https://files.catbox.moe/rryzbu.jpg');background-size:cover;background-position:center;z-index:0;
+  }
+  .bg::after{content:"";position:absolute;inset:0;backdrop-filter:blur(14px);background:linear-gradient(180deg, rgba(0,0,0,0.35), rgba(0,0,0,0.65))}
+  .container{position:relative;z-index:1;width:94%;max-width:1100px;padding:28px;margin-top:18px}
+  header{display:flex;gap:18px;align-items:center}
+  .profile{
+    display:flex;flex-direction:column;align-items:center;gap:8px;
+    background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+    padding:12px;border-radius:12px;box-shadow:0 12px 40px rgba(0,0,0,0.6)
+  }
+  .avatar{width:140px;height:140px;border-radius:50%;overflow:hidden;flex:0 0 140px;border:4px solid #fff}
+  .avatar img{width:100%;height:100%;object-fit:cover;display:block}
+  .ownerName{font-size:1.4rem;color:var(--accent2);font-weight:800;text-shadow:0 6px 18px rgba(0,0,0,0.6)}
+  .ownerInfo{max-width:640px;color:#ddd;opacity:0.95;text-align:left;margin-top:8px}
+  .actions{margin-left:auto;display:flex;gap:12px;align-items:center}
+  .btn{padding:10px 16px;border-radius:999px;border:none;cursor:pointer;background:linear-gradient(135deg,var(--accent1),var(--accent2));color:#000;font-weight:700}
+  .btn.secondary{background:transparent;border:1px solid rgba(255,255,255,0.06);color:#fff}
+  /* search */
+  .searchBox{margin-top:20px;display:flex;gap:12px;align-items:center}
+  .searchBox input{flex:1;padding:12px;border-radius:999px;border:none;background:rgba(255,255,255,0.03);color:#fff;text-align:center}
+  .searchBox .btn{flex:0 0 auto}
+  /* results */
+  .results{margin-top:20px;display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px}
+  .card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:12px;border-radius:12px;display:flex;flex-direction:column;gap:8px;min-height:220px;position:relative;overflow:hidden;transition:transform .18s ease,box-shadow .18s ease}
+  .card:hover{transform:translateY(-6px);box-shadow:0 24px 60px rgba(0,0,0,0.6)}
+  .cover{width:100%;height:140px;border-radius:8px;overflow:hidden;background:#111}
+  .cover img{width:100%;height:100%;object-fit:cover;display:block}
+  .meta{display:flex;flex-direction:column;gap:4px}
+  .title{font-weight:800;color:var(--accent2);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .artist{color:#fff;opacity:0.95;font-size:0.95rem}
+  .album{color:#ddd;opacity:0.85;font-size:0.85rem}
+  .row{display:flex;gap:8px;align-items:center;justify-content:space-between;margin-top:auto}
+  .controls{display:flex;gap:8px;align-items:center}
+  .smallBtn{padding:8px 10px;border-radius:10px;border:none;cursor:pointer;background:rgba(255,255,255,0.03);color:#fff}
+  .playBtn{background:linear-gradient(90deg,#00c8ff,#00ffea);color:#000;font-weight:800}
+  .downloadBtn{background:linear-gradient(90deg,#00c832,#00ff57);color:#000;font-weight:800}
+  .moreBtn{background:linear-gradient(90deg,var(--accent1),var(--accent2));color:#000;font-weight:800}
+  /* modal confirm */
+  .modal{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.6);z-index:50;opacity:0;pointer-events:none;transition:opacity .18s}
+  .modal.open{opacity:1;pointer-events:auto}
+  .dialog{background:#0b0b0d;padding:18px;border-radius:12px;max-width:420px;width:92%;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,0.6)}
+  .dialog h4{margin:0 0 8px;color:var(--accent2)}
+  .dialog p{margin:6px 0 12px;color:#ddd}
+  .dialog .row{justify-content:center}
+  .dialog button{padding:10px 16px;border-radius:10px;border:none;cursor:pointer}
+  .dialog .yes{background:linear-gradient(90deg,#00c8ff,#00ffea);color:#000;margin-right:10px}
+  .dialog .no{background:rgba(255,255,255,0.04);color:#fff}
+  /* player bar */
+  .playerBar{position:fixed;left:50%;transform:translateX(-50%);bottom:18px;width:92%;max-width:980px;background:rgba(0,0,0,0.5);padding:10px;border-radius:12px;display:flex;gap:12px;align-items:center;z-index:30}
+  .pCover{width:64px;height:64px;border-radius:8px;overflow:hidden;background:#111}
+  .pCover img{width:100%;height:100%;object-fit:cover}
+  .pMeta{flex:1;min-width:0}
+  .pTitle{font-weight:800;color:var(--accent2)}
+  .pArtist{color:#fff;opacity:0.95}
+  .pControls{display:flex;gap:8px}
+  /* small screen tweaks */
+  @media(max-width:600px){header{flex-direction:column;align-items:center}.actions{margin-left:0}}
+</style>
+</head>
+<body>
+  <div class="bg" aria-hidden="true"></div>
+
+  <div class="container">
+    <header>
+      <div class="profile" aria-hidden="false">
+        <div class="avatar"><img id="ownerImg" src="https://files.catbox.moe/rryzbu.jpg" alt="GusOfcXD"></div>
+        <div style="margin-top:8px;text-align:left">
+          <div class="ownerName">GusOfcXD 404</div>
+          <div class="ownerInfo">Olá usuários do site, eu sou GusOfcXD, eu criei este site para vocês encontrarem suas músicas favoritas.</div>
+        </div>
+      </div>
+
+      <div class="actions">
+        <button class="btn secondary" id="backBtn">← Voltar</button>
+      </div>
+    </header>
+
+    <div class="searchBox" style="margin-top:18px">
+      <input id="q" placeholder="Digite o nome da música que você deseja procurar (ex: adele hello)" aria-label="buscar">
+      <button class="btn" id="searchBtn">Jogar</button>
+    </div>
+
+    <div id="status" style="margin-top:12px;text-align:center;color:#ddd"></div>
+
+    <section class="results" id="results" aria-live="polite" style="margin-top:18px">
+      <!-- cards muncul di sini -->
+    </section>
+  </div>
+
+  <!-- modal confirm -->
+  <div id="modal" class="modal" role="dialog" aria-modal="true" aria-hidden="true">
+    <div class="dialog">
+      <h4>Track IP</h4>
+      <p>Deseja acessar essa funcionalidade?</p>
+      <div class="row">
+        <button class="yes" id="modalYes">Yes</button>
+        <button class="no" id="modalNo">No</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- player bar -->
+  <div id="playerBar" class="playerBar" style="display:none">
+    <div class="pCover"><img id="pcoverImg" src="" alt=""></div>
+    <div class="pMeta">
+      <div class="pTitle" id="pTitle">-</div>
+      <div class="pArtist" id="pArtist">-</div>
+      <input id="seek" type="range" min="0" max="100" value="0" style="width:100%">
+    </div>
+    <div class="pControls">
+      <button id="prev">⏮</button>
+      <button id="play">▶</button>
+      <button id="next">⏭</button>
+    </div>
+  </div>
+
+<script>
+/* PlayMusic page script
+   - pakai iTunes Search API (no key)
+   - tampil 5 lagu (limit=5)
+   - download: fetch preview -> blob -> download dengan filename sanitized (works reliably)
+   - modal confirm untuk tombol lebih (⋮)
+*/
+
+const searchBtn = document.getElementById('searchBtn');
+const qInput = document.getElementById('q');
+const resultsEl = document.getElementById('results');
+const statusEl = document.getElementById('status');
+const modal = document.getElementById('modal');
+const modalYes = document.getElementById('modalYes');
+const modalNo = document.getElementById('modalNo');
+const backBtn = document.getElementById('backBtn');
+
+let currentConfirmIndex = null;
+let tracks = [];
+let currentIndex = -1;
+
+const audio = new Audio();
+audio.crossOrigin = 'anonymous';
+
+const playerBar = document.getElementById('playerBar');
+const pcoverImg = document.getElementById('pcoverImg');
+const pTitle = document.getElementById('pTitle');
+const pArtist = document.getElementById('pArtist');
+const seek = document.getElementById('seek');
+const playBtn = document.getElementById('play');
+const prevBtn = document.getElementById('prev');
+const nextBtn = document.getElementById('next');
+
+backBtn.addEventListener('click', ()=> location.href = 'index.html');
+
+searchBtn.addEventListener('click', ()=> startSearch());
+qInput.addEventListener('keydown', (e)=> { if(e.key === 'Enter') startSearch(); });
+
+async function startSearch(){
+  const term = qInput.value.trim();
+  if(!term){ alert('Digite o nome da música!'); return; }
+  resultsEl.innerHTML = '';
+  statusEl.textContent = 'Proses mencari lagu...';
+  // visual small delay then message change
+  await new Promise(r => setTimeout(r, 1000));
+  // show msg for 4s then change text
+  await new Promise(r => setTimeout(r, 3000));
+  statusEl.textContent = 'Lagu ditemukan, tunggu saya akan mengirimkan nya';
+  // fetch iTunes
+  try{
+    const url = `https://itunes.apple.com/search?term=${encodeURIComponent(term)}&entity=song&limit=5&country=BR`;
+    const res = await fetch(url);
+    const data = await res.json();
+    tracks = (data.results || []).map(t => ({
+      title: t.trackName,
+      artist: t.artistName,
+      album: t.collectionName || '-',
+      artwork: t.artworkUrl100 ? t.artworkUrl100.replace('100x100','500x500') : '',
+      preview: t.previewUrl,
+      durationMs: t.trackTimeMillis,
+      trackView: t.trackViewUrl
+    }));
+    if(!tracks.length){
+      statusEl.textContent = 'Nenhum resultado encontrado';
+      return;
+    }
+    statusEl.textContent = `Menemukan ${tracks.length} lagu`;
+    renderTracks();
+  } catch(err){
+    console.error(err);
+    statusEl.textContent = 'Erro ao buscar. Tente novamente.';
+  }
+}
+
+function renderTracks(){
+  resultsEl.innerHTML = '';
+  tracks.forEach((t, idx) => {
+    const card = document.createElement('article');
+    card.className = 'card';
+    card.innerHTML = `
+      <div class="cover"><img src="${t.artwork}" alt="${escapeHtml(t.title)}"></div>
+      <div class="meta">
+        <div class="title">${escapeHtml(t.title)}</div>
+        <div class="artist">${escapeHtml(t.artist)}</div>
+        <div class="album">${escapeHtml(t.album)}</div>
+        <div style="font-size:0.85rem;color:#ccc;margin-top:6px">Duração: ${formatMs(t.durationMs)}</div>
+      </div>
+      <div class="row">
+        <div class="controls">
+          <button class="smallBtn playBtn" data-idx="${idx}">Putar</button>
+          <button class="smallBtn downloadBtn" data-idx="${idx}">Download</button>
+        </div>
+        <div>
+          <button class="smallBtn moreBtn" data-idx="${idx}">⋮</button>
+        </div>
+      </div>
+    `;
+    resultsEl.appendChild(card);
+  });
+
+  // attach listeners
+  document.querySelectorAll('.playBtn').forEach(b=>{
+    b.addEventListener('click', ()=> playIndex(+b.dataset.idx));
+  });
+  document.querySelectorAll('.downloadBtn').forEach(b=>{
+    b.addEventListener('click', ()=> downloadIndex(+b.dataset.idx));
+  });
+  document.querySelectorAll('.moreBtn').forEach(b=>{
+    b.addEventListener('click', ()=> openConfirm(+b.dataset.idx));
+  });
+}
+
+function escapeHtml(s){return String(s||'').replace(/[&<>"']/g,m=>({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' }[m]));}
+function formatMs(ms){ if(!ms) return '-'; const s = Math.floor(ms/1000); const m = Math.floor(s/60); const sec = s%60; return `${m}:${sec.toString().padStart(2,'0')}`; }
+
+function playIndex(i){
+  const t = tracks[i];
+  if(!t || !t.preview){ alert('Preview tidak tersedia'); return; }
+  currentIndex = i;
+  audio.src = t.preview;
+  audio.play();
+  showPlayer(t);
+}
+
+function showPlayer(t){
+  pcoverImg.src = t.artwork;
+  pTitle.textContent = t.title;
+  pArtist.textContent = t.artist;
+  playerBar.style.display = 'flex';
+}
+
+playBtn.addEventListener('click', ()=>{
+  if(audio.paused) audio.play(); else audio.pause();
+  updatePlayBtn();
+});
+prevBtn.addEventListener('click', ()=> {
+  if(currentIndex>0) playIndex(currentIndex-1);
+});
+nextBtn.addEventListener('click', ()=> {
+  if(currentIndex < tracks.length -1) playIndex(currentIndex+1);
+});
+
+audio.addEventListener('timeupdate', ()=> {
+  if(!audio.duration) return;
+  seek.value = Math.floor((audio.currentTime/audio.duration)*100);
+});
+seek.addEventListener('input', ()=> {
+  if(!audio.duration) return;
+  audio.currentTime = (seek.value/100) * audio.duration;
+});
+audio.addEventListener('play', updatePlayBtn);
+audio.addEventListener('pause', updatePlayBtn);
+audio.addEventListener('ended', ()=> {
+  if(currentIndex < tracks.length -1) playIndex(currentIndex+1);
+  else { audio.pause(); }
+});
+
+function updatePlayBtn(){
+  playBtn.textContent = audio.paused ? '▶' : '⏸';
+}
+
+/* download: fetch preview -> blob -> save (reliable) */
+async function downloadIndex(i){
+  const t = tracks[i];
+  if(!t || !t.preview){
+    alert('Preview tidak tersedia untuk diunduh');
+    return;
+  }
+  try{
+    statusEl.textContent = 'Mempersiapkan download...';
+    const r = await fetch(t.preview);
+    if(!r.ok) throw new Error('Gagal fetch preview');
+    const blob = await r.blob();
+    // sanitize filename
+    const safe = (t.title + ' - ' + t.artist).replace(/[^a-z0-9\-_\. ]/ig,'').slice(0,80);
+    const filename = safe ? `${safe}.mp3` : `music-gusofcxd404.mp3`;
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = filename;
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    URL.revokeObjectURL(url);
+    statusEl.textContent = 'Download selesai';
+  }catch(err){
+    console.error(err);
+    statusEl.textContent = 'Download gagal. Coba lagi.';
+    alert('Gagal mengunduh preview (CORS/Network). Coba lagi dalam beberapa saat.');
+  } finally {
+    setTimeout(()=>statusEl.textContent = '', 2500);
+  }
+}
+
+/* modal confirm for moreBtn */
+function openConfirm(idx){
+  currentConfirmIndex = idx;
+  modal.classList.add('open');
+  modal.setAttribute('aria-hidden','false');
+}
+modalNo.addEventListener('click', ()=> {
+  modal.classList.remove('open');
+  modal.setAttribute('aria-hidden','true');
+});
+modalYes.addEventListener('click', ()=> {
+  modal.classList.remove('open');
+  modal.setAttribute('aria-hidden','true');
+  // show track IP info
+  const t = tracks[currentConfirmIndex];
+  if(!t) return;
+  alert(`Track Info:\nNome: ${t.title}\nArtista: ${t.artist}\nAlbum: ${t.album}\nDuração: ${formatMs(t.durationMs)}`);
+});
+
+/* small UX: focus first input */
+qInput.focus();
+</script>
+</body>
+  </html>
