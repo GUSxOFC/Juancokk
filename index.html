@@ -3,64 +3,197 @@
 <head>
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
-<title>GusOfcXD</title>
+<title>GusOfcXD 404</title>
 <style>
-  :root{--accent1:#ff6b00;--accent2:#ffdd00}
-  *{box-sizing:border-box}
-  body{margin:0;font-family:Inter,Arial,Helvetica,sans-serif;background:#07070a;color:#fff;min-height:100vh;display:flex;align-items:center;justify-content:center}
-  .wrap{width:92%;max-width:980px;padding:28px;border-radius:14px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));box-shadow:0 18px 50px rgba(0,0,0,0.6);text-align:center}
-  h1{margin:0 0 8px;color:var(--accent2);text-shadow:0 6px 18px rgba(0,0,0,0.6)}
-  p.lead{margin:0 0 18px;color:#ddd;opacity:0.95}
-  .features{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));margin-top:18px}
-  .card{background:rgba(255,255,255,0.02);padding:14px;border-radius:12px;min-height:92px;display:flex;flex-direction:column;justify-content:space-between;align-items:center}
-  .card h3{margin:4px 0;color:var(--accent2)}
-  .btn{margin-top:10px;padding:10px 18px;border-radius:999px;border:none;cursor:pointer;background:linear-gradient(135deg,var(--accent1),var(--accent2));color:#000;font-weight:700;box-shadow:0 8px 30px rgba(255,130,0,0.12)}
-  .small{font-size:0.9rem;color:#ddd;opacity:0.9}
-  .logoRow{display:flex;gap:12px;align-items:center;justify-content:center;margin-top:18px}
-  .logo{width:72px;height:72px;border-radius:12px;background:url('https://files.catbox.moe/rryzbu.jpg') center/cover;border:3px solid rgba(255,255,255,0.06);box-shadow:0 8px 30px rgba(0,0,0,0.6)}
-  footer{margin-top:20px;font-size:0.85rem;color:#bbb}
-  @media(min-width:720px){.wrap{padding:36px}}
+body {
+  margin: 0;
+  font-family: Poppins, Arial, sans-serif;
+  background: radial-gradient(circle at top, #001429, #000);
+  color: #fff;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow-x: hidden;
+}
+
+main {
+  width: 92%;
+  max-width: 900px;
+  padding: 32px;
+  background: rgba(255,255,255,0.05);
+  border-radius: 16px;
+  box-shadow: 0 0 25px rgba(0,255,255,0.15);
+  text-align: center;
+  animation: fadeIn 1.5s ease;
+  backdrop-filter: blur(6px);
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+h1 {
+  color: #00d0ff;
+  margin-bottom: 8px;
+  font-size: 1.8em;
+  letter-spacing: 1px;
+}
+
+p.lead {
+  color: #cce6ff;
+  margin-bottom: 22px;
+}
+
+.features {
+  display: grid;
+  gap: 16px;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  margin-top: 20px;
+}
+
+.card {
+  background: rgba(0,0,40,0.4);
+  padding: 18px;
+  border-radius: 14px;
+  box-shadow: 0 0 18px rgba(0,180,255,0.12);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 25px rgba(0,180,255,0.3);
+}
+
+h3 { margin: 8px 0; color: #00e6ff; }
+
+.small { color: #b7daff; font-size: 0.9em; }
+
+.btn {
+  margin-top: 12px;
+  background: linear-gradient(90deg, #009dff, #00ffee);
+  border: none;
+  color: #000;
+  padding: 10px 20px;
+  border-radius: 25px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+.btn:hover {
+  transform: scale(1.07);
+  box-shadow: 0 0 15px #00eaff;
+}
+
+.trackip-section {
+  grid-column: 1 / -1;
+  background: rgba(0,40,80,0.4);
+  border-radius: 14px;
+  padding: 22px;
+  box-shadow: 0 0 18px rgba(0,200,255,0.15);
+  transition: all 0.3s ease;
+}
+.trackip-section:hover {
+  transform: scale(1.03);
+  box-shadow: 0 0 28px rgba(0,200,255,0.25);
+}
+.trackip-section h3 {
+  color: #00e0ff;
+  margin-bottom: 10px;
+}
+.trackip-section p {
+  color: #b0e6ff;
+  font-size: 0.95em;
+  margin-bottom: 16px;
+}
+.trackip-btn {
+  background: linear-gradient(90deg, #00d0ff, #006aff);
+  border: none;
+  color: white;
+  padding: 10px 22px;
+  border-radius: 10px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+}
+.trackip-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 20px #00d0ff;
+}
+
+.logoRow {
+  margin-top: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.logo {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  background: url('https://files.catbox.moe/rryzbu.jpg') center/cover;
+  border: 3px solid #00eaff;
+  box-shadow: 0 0 30px rgba(0,255,255,0.4);
+  animation: float 3s ease-in-out infinite;
+}
+@keyframes float {
+  0%,100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+footer {
+  margin-top: 16px;
+  font-size: 0.85em;
+  color: #b5eaff;
+}
 </style>
 </head>
 <body>
-  <main class="wrap" role="main">
-    <h1>Hi, welcome ke website GusOfcXD</h1>
-    <p class="lead">Temukan musik favoritmu cepat dan mudah. Pilih fitur di bawah untuk mulai.</p>
+  <main>
+    <h1>Olá, seja bem-vindo(a) ao site GusOfcXD</h1>
+    <p class="lead">Escolha uma função abaixo para começar sua experiência.</p>
 
-    <div class="features" aria-label="fitur">
+    <div class="features">
       <div class="card">
         <h3>Play Music</h3>
-        <div class="small">Cari, dengar preview, dan unduh preview lagu (5 hasil).</div>
+        <div class="small">Encontre e reproduza suas músicas favoritas.</div>
         <button class="btn" id="goPlay">Play Music</button>
+      </div>
+
+      <div class="trackip-section">
+        <h3>🌐 Track IP</h3>
+        <p>Para rastrear um endereço IP, clique no botão abaixo para acessar a página.</p>
+        <button id="trackIPBtn" class="trackip-btn">Acessar Track IP</button>
       </div>
 
       <div class="card">
         <h3>Contact</h3>
-        <div class="small">Admin: @gofcc404 (Telegram)</div>
+        <div class="small">Fale com o administrador @gofcc404</div>
         <button class="btn" id="contactBtn">Chat Admin</button>
       </div>
 
       <div class="card">
         <h3>Info</h3>
-        <div class="small">Página criada por GusOfcXD 404 — projeto simples para música.</div>
+        <div class="small">Criado por GusOfcXD 404 — projeto simples e funcional.</div>
       </div>
     </div>
 
-    <div class="logoRow" aria-hidden="true">
-      <div class="logo" title="GusOfcXD"></div>
+    <div class="logoRow">
+      <div class="logo"></div>
+      <footer>GusOfcXD 404</footer>
     </div>
-
-    <footer>© GusOfcXD 404</footer>
   </main>
 
 <script>
-  document.getElementById('goPlay').addEventListener('click', ()=> {
-    // buka halaman fitur (sama folder)
-    window.location.href = 'playmusic.html';
-  });
-  document.getElementById('contactBtn').addEventListener('click', ()=> {
-    window.open('https://t.me/gofcc404','_blank');
-  });
+document.getElementById('goPlay').addEventListener('click', ()=> {
+  window.location.href = 'playmusic.html';
+});
+document.getElementById('contactBtn').addEventListener('click', ()=> {
+  window.open('https://t.me/gofcc404','_blank');
+});
+document.getElementById('trackIPBtn').addEventListener('click', ()=> {
+  const ok = confirm('Deseja acessar essa funcionalidade?');
+  if (ok) window.location.href = 'trackip.html';
+});
 </script>
 </body>
-  </html>
+</html>
