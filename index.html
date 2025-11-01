@@ -159,6 +159,181 @@ footer {
         <button class="btn" id="goPlay">Play Music</button>
       </div>
 
+      <div class="card">
+        <h3>📱 iPhone Quoted</h3>
+        <div class="small">Click ini untuk ke halaman iPhone Quoted Generator.</div>
+        <button class="btn" id="goQuoted">iPhone Quoted</button>
+      </div>
+
+      <div class="trackip-section">
+        <h3>🌐 Track IP</h3>
+        <p>Para rastrear um endereço IP, clique no botão abaixo para acessar a página.</p>
+        <button id="trackIPBtn" class="trackip-btn">Acessar Track IP</button>
+      </div>
+
+      <div class="card">
+        <h3>Contact</h3>
+        <div class="small">Fale com o administrador @gofcc404</div>
+        <button class="btn" id="contactBtn">Chat Admin</button>
+      </div>
+
+      <div class="card">
+        <h3>Info</h3>
+        <div class="small">Criado por GusOfcXD 404 — projeto simples e funcional.</div>
+      </div>
+    </div>
+
+    <div class="logoRow">
+      <div class="logo"></div>
+      <footer>GusOfcXD 404</footer>
+    </div>
+  </main>
+
+<script>
+document.getElementById('goPlay').addEventListener('click', ()=> {
+  window.location.href = 'playmusic.html';
+});
+
+document.getElementById('contactBtn').addEventListener('click', ()=> {
+  window.open('https://t.me/gofcc404','_blank');
+});
+
+document.getElementById('trackIPBtn').addEventListener('click', ()=> {
+  const ok = confirm('Deseja acessar essa funcionalidade?');
+  if (ok) window.location.href = 'trackip.html';
+});
+
+document.getElementById('goQuoted').addEventListener('click', ()=> {
+  const ok = confirm('Buka halaman iPhone Quoted Generator?');
+  if (ok) window.location.href = 'ipqt.html';
+});
+</script>
+</body>
+</html>h1 {
+  color: #00d0ff;
+  margin-bottom: 8px;
+  font-size: 1.8em;
+  letter-spacing: 1px;
+}
+
+p.lead {
+  color: #cce6ff;
+  margin-bottom: 22px;
+}
+
+.features {
+  display: grid;
+  gap: 16px;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  margin-top: 20px;
+}
+
+.card {
+  background: rgba(0,0,40,0.4);
+  padding: 18px;
+  border-radius: 14px;
+  box-shadow: 0 0 18px rgba(0,180,255,0.12);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 25px rgba(0,180,255,0.3);
+}
+
+h3 { margin: 8px 0; color: #00e6ff; }
+
+.small { color: #b7daff; font-size: 0.9em; }
+
+.btn {
+  margin-top: 12px;
+  background: linear-gradient(90deg, #009dff, #00ffee);
+  border: none;
+  color: #000;
+  padding: 10px 20px;
+  border-radius: 25px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+.btn:hover {
+  transform: scale(1.07);
+  box-shadow: 0 0 15px #00eaff;
+}
+
+.trackip-section {
+  grid-column: 1 / -1;
+  background: rgba(0,40,80,0.4);
+  border-radius: 14px;
+  padding: 22px;
+  box-shadow: 0 0 18px rgba(0,200,255,0.15);
+  transition: all 0.3s ease;
+}
+.trackip-section:hover {
+  transform: scale(1.03);
+  box-shadow: 0 0 28px rgba(0,200,255,0.25);
+}
+.trackip-section h3 {
+  color: #00e0ff;
+  margin-bottom: 10px;
+}
+.trackip-section p {
+  color: #b0e6ff;
+  font-size: 0.95em;
+  margin-bottom: 16px;
+}
+.trackip-btn {
+  background: linear-gradient(90deg, #00d0ff, #006aff);
+  border: none;
+  color: white;
+  padding: 10px 22px;
+  border-radius: 10px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+}
+.trackip-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 20px #00d0ff;
+}
+
+.logoRow {
+  margin-top: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.logo {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  background: url('https://files.catbox.moe/rryzbu.jpg') center/cover;
+  border: 3px solid #00eaff;
+  box-shadow: 0 0 30px rgba(0,255,255,0.4);
+  animation: float 3s ease-in-out infinite;
+}
+@keyframes float {
+  0%,100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+footer {
+  margin-top: 16px;
+  font-size: 0.85em;
+  color: #b5eaff;
+}
+</style>
+</head>
+<body>
+  <main>
+    <h1>Olá, seja bem-vindo(a) ao site GusOfcXD</h1>
+    <p class="lead">Escolha uma função abaixo para começar sua experiência.</p>
+
+    <div class="features">
+      <div class="card">
+        <h3>Play Music</h3>
+        <div class="small">Encontre e reproduza suas músicas favoritas.</div>
+        <button class="btn" id="goPlay">Play Music</button>
+      </div>
+
       <div class="trackip-section">
         <h3>Track IP</h3>
         <p>Para rastrear um endereço IP, clique no botão abaixo para acessar a página.</p>
