@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>GusOfcXD 404</title>
+<style>
+body {
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  background: radial-gradient(circle at top left, #111, #000);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  overflow: hidden;
+}
+.container {
+  width: 90%;
+  max-width: 420px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 20px;
+  padding: 30px;
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(10px);
+  text-align: center;
+  animation: fade 1.2s ease;
+}
+@keyframes fade {
+  from {opacity: 0; transform: translateY(20px);}
+  to {opacity: 1; transform: translateY(0);}
+}
+h1 {
+  font-size: 1.6em;
+  color: #00d0ff;
+  margin-bottom: 20px;
+  letter-spacing: 1px;
+}
+.ip-info {
+  text-align: left;
+  line-height: 1.8em;
+  margin-top: 10px;
+  padding: 10px 0;
+  border-top: 1px solid rgba(255,255,255,0.1);
+}
+.btn-refresh {
+  margin-top: 20px;
+  padding: 10px 18px;
+  border: none;
+  border-radius: 10px;
+  background: linear-gradient(90deg, #00d0ff, #0066ff);
+  color: #fff;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all .3s ease;
+}
+.btn-refresh:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 15px #00d0ff;
+}
+.footer {
+  font-size: 0.85em;
+  margin-top: 25px;
+  color: #aaa;
+}
+</style>
+</head>
+<body>
+<div class="container">
+  <h1>Track IP — GusOfcXD 404</h1>
+  <div class="ip-info" id="info">
+    Carregando informações do IP...
+  </div>
+  <button class="btn-refresh" onclick="getIP()">Atualizar</button>
+  <div class="footer">Powered by GusOfcXD</div>
+</div>
+<script>
+async function getIP() {
+  const info = document.getElementById('info')
+  info.innerHTML = 'Buscando...'
+  try {
+    const res = await fetch('https://ipapi.co/json/')
+    const data = await res.json()
+    info.innerHTML = `
+      <b>Endereço IP:</b> ${data.ip}<br>
+      <b>País:</b> ${data.country_name} (${data.country_code})<br>
+      <b>Região:</b> ${data.region}<br>
+      <b>Cidade:</b> ${data.city}<br>
+      <b>Provedor:</b> ${data.org}<br>
+      <b>Latitude:</b> ${data.latitude}<br>
+      <b>Longitude:</b> ${data.longitude}<br>
+      <b>Fuso horário:</b> ${data.timezone}<br>
+      <b>Data e hora local:</b> ${new Date().toLocaleString()}
+    `
+  } catch (e) {
+    info.innerHTML = 'Falha ao buscar IP. Verifique sua conexão.'
+  }
+}
+getIP()
+</script>
+</body>
+</html>
