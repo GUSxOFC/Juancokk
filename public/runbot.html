@@ -1,0 +1,87 @@
+<!DOCTYPE html><html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Telegram Bot Runner</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+  <style>
+    body { font-family: 'Segoe UI', sans-serif; background: #0e0e0e; color: #fff; display:flex; flex-direction:column; align-items:center; justify-content:center; height:100vh; gap:20px; }
+    .container { background: #1c1c1c; padding:20px; border-radius:10px; width:90%; max-width:400px; box-shadow:0 0 15px rgba(0,0,0,0.5); }
+    input[type=file] { width:100%; padding:10px; border-radius:8px; background:#222; color:#fff; border:1px solid #444; }
+    button { background:#0078ff; border:none; color:#fff; padding:10px 15px; border-radius:8px; cursor:pointer; width:100%; font-weight:bold; }
+    button:hover { background:#005fcc; }
+    #status, #uptime, #mem, #ping { margin:5px 0; }
+    pre { height:200px; overflow:auto; background:#111; color:#0f0; padding:8px; border-radius:6px; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Upload ZIP Bot Telegram</h2>
+    <input id="zipInput" type="file" accept=".zip" />
+    <button id="uploadBtn">Upload & Start</button>
+    <button id="stopBtn" disabled>Stop Bot</button>
+    <p id="status">Status: idle</p>
+    <p id="uptime">Uptime: -</p>
+    <p id="mem">Memory: -</p>
+    <p id="ping">Ping: -</p>
+    <pre id="logs"></pre>
+  </div>  <script>
+    const zipInput = document.getElementById('zipInput');
+    const uploadBtn = document.getElementById('uploadBtn');
+    const stopBtn = document.getElementById('stopBtn');
+    const statusEl = document.getElementById('status');
+    const uptimeEl = document.getElementById('uptime');
+    const memEl = document.getElementById('mem');
+    const pingEl = document.getElementById('ping');
+    const logsEl = document.getElementById('logs');
+
+    let pollInterval = null;
+
+    uploadBtn.addEventListener('click', async ()=>{
+      const f = zipInput.files[0];
+      if(!f){ alert('Pilih file ZIP dulu'); return; }
+      uploadBtn.disabled = true;
+      statusEl.textContent = 'Mengunggah...';
+      const fd = new FormData();
+      fd.append('zip', f, f.name);
+      try{
+        const res = await fetch('/api/run-bot', { method:'POST', body: fd });
+        const j = await res.json();
+        if(res.ok){
+          statusEl.textContent = 'Bot started (id: ' + j.jobId + ')';
+          stopBtn.disabled = false;
+          startPolling();
+        } else {
+          statusEl.textContent = 'Error: ' + (j.message||res.status);
+          uploadBtn.disabled = false;
+        }
+      }catch(e){ statusEl.textContent = 'Upload failed: '+e.message; uploadBtn.disabled = false; }
+    });
+
+    stopBtn.addEventListener('click', async ()=>{
+      stopBtn.disabled = true;
+      try{
+        await fetch('/api/stop-bot', { method:'POST' });
+        statusEl.textContent = 'Stopping...';
+      }catch(e){ statusEl.textContent = 'Stop failed: '+e.message; }
+    });
+
+    function startPolling(){
+      if(pollInterval) clearInterval(pollInterval);
+      pollInterval = setInterval(async ()=>{
+        try{
+          const t0 = performance.now();
+          const res = await fetch('/api/status');
+          const t1 = performance.now();
+          const data = await res.json();
+          pingEl.textContent = (t1-t0).toFixed(0) + ' ms';
+          statusEl.textContent = data.running ? 'Running' : 'Stopped';
+          uptimeEl.textContent = data.uptime_str || '-';
+          memEl.textContent = data.memory || '-';
+          logsEl.textContent = (data.recent_logs||[]).join('\n') + '\n' + logsEl.textContent;
+          if(!data.running){ clearInterval(pollInterval); pollInterval = null; uploadBtn.disabled = false; stopBtn.disabled = true; }
+        }catch(e){ console.error(e); }
+      }, 2000);
+    }
+  </script></body>
+</html>
