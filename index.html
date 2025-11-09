@@ -1,212 +1,1331 @@
-<!doctype html>
-<html lang="pt-BR">
+<!DOCTYPE html>
+<html lang="id">
 <head>
-<meta charset="utf-8"/>
-<meta name="viewport" content="width=device-width,initial-scale=1"/>
-<title>GusOfcXD 404</title>
-<style>
-body {
-  margin: 0;
-  font-family: Poppins, Arial, sans-serif;
-  background: radial-gradient(circle at top, #001429, #000);
-  color: #fff;
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow-x: hidden;
-}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GusOfcXD 404 - Mission Portal</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --secondary-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            --neon-gradient: linear-gradient(45deg, #00ffff, #ff00ff, #ffff00);
+            --dark-bg: #0a0a0f;
+            --card-bg: rgba(255, 255, 255, 0.03);
+            --text-primary: #ffffff;
+            --text-secondary: #b8b8d1;
+            --accent: #764ba2;
+            --neon-cyan: #00ffff;
+            --neon-pink: #ff00ff;
+            --neon-yellow: #ffff00;
+        }
 
-main {
-  width: 92%;
-  max-width: 900px;
-  padding: 32px;
-  background: rgba(255,255,255,0.05);
-  border-radius: 16px;
-  box-shadow: 0 0 25px rgba(0,255,255,0.15);
-  text-align: center;
-  animation: fadeIn 1.5s ease;
-  backdrop-filter: blur(6px);
-}
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
-}
+        body {
+            font-family: 'Orbitron', 'Segoe UI', monospace;
+            background: var(--dark-bg);
+            color: var(--text-primary);
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+        }
 
-h1 {
-  color: #00d0ff;
-  margin-bottom: 8px;
-  font-size: 1.8em;
-  letter-spacing: 1px;
-}
+        /* Access Denied Screen */
+        .access-denied {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: radial-gradient(ellipse at center, #1a0033 0%, #000000 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            overflow: hidden;
+        }
 
-p.lead {
-  color: #cce6ff;
-  margin-bottom: 22px;
-}
+        .denied-content {
+            text-align: center;
+            z-index: 10;
+            animation: glitch 2s infinite;
+        }
 
-.features {
-  display: grid;
-  gap: 16px;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  margin-top: 20px;
-}
+        @keyframes glitch {
+            0%, 100% {
+                text-shadow: 
+                    0.05em 0 0 rgba(255, 0, 0, 0.75),
+                    -0.05em -0.025em 0 rgba(0, 255, 0, 0.75),
+                    0.025em 0.05em 0 rgba(0, 0, 255, 0.75);
+            }
+            14% {
+                text-shadow: 
+                    0.05em 0 0 rgba(255, 0, 0, 0.75),
+                    -0.05em -0.025em 0 rgba(0, 255, 0, 0.75),
+                    0.025em 0.05em 0 rgba(0, 0, 255, 0.75);
+            }
+            15% {
+                text-shadow: 
+                    -0.05em -0.025em 0 rgba(255, 0, 0, 0.75),
+                    0.025em 0.025em 0 rgba(0, 255, 0, 0.75),
+                    -0.05em -0.05em 0 rgba(0, 0, 255, 0.75);
+            }
+            49% {
+                text-shadow: 
+                    -0.05em -0.025em 0 rgba(255, 0, 0, 0.75),
+                    0.025em 0.025em 0 rgba(0, 255, 0, 0.75),
+                    -0.05em -0.05em 0 rgba(0, 0, 255, 0.75);
+            }
+            50% {
+                text-shadow: 
+                    0.025em 0.05em 0 rgba(255, 0, 0, 0.75),
+                    0.05em 0 0 rgba(0, 255, 0, 0.75),
+                    0 -0.05em 0 rgba(0, 0, 255, 0.75);
+            }
+            99% {
+                text-shadow: 
+                    0.025em 0.05em 0 rgba(255, 0, 0, 0.75),
+                    0.05em 0 0 rgba(0, 255, 0, 0.75),
+                    0 -0.05em 0 rgba(0, 0, 255, 0.75);
+            }
+        }
 
-.card {
-  background: rgba(0,0,40,0.4);
-  padding: 18px;
-  border-radius: 14px;
-  box-shadow: 0 0 18px rgba(0,180,255,0.12);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-.card:hover {
-  transform: scale(1.05);
-  box-shadow: 0 0 25px rgba(0,180,255,0.3);
-}
+        .denied-title {
+            font-size: 5rem;
+            font-weight: 900;
+            background: var(--neon-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 20px;
+            letter-spacing: 5px;
+            animation: pulse 1.5s infinite;
+        }
 
-h3 { margin: 8px 0; color: #00e6ff; }
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
 
-.small { color: #b7daff; font-size: 0.9em; }
+        .denied-subtitle {
+            font-size: 1.5rem;
+            color: var(--neon-cyan);
+            margin-bottom: 30px;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+        }
 
-.btn {
-  margin-top: 12px;
-  background: linear-gradient(90deg, #009dff, #00ffee);
-  border: none;
-  color: #000;
-  padding: 10px 20px;
-  border-radius: 25px;
-  font-weight: bold;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-.btn:hover {
-  transform: scale(1.07);
-  box-shadow: 0 0 15px #00eaff;
-}
+        .login-redirect-btn {
+            background: transparent;
+            border: 2px solid var(--neon-cyan);
+            color: var(--neon-cyan);
+            padding: 15px 40px;
+            font-size: 1.2rem;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            position: relative;
+            overflow: hidden;
+        }
 
-.trackip-section {
-  grid-column: 1 / -1;
-  background: rgba(0,40,80,0.4);
-  border-radius: 14px;
-  padding: 22px;
-  box-shadow: 0 0 18px rgba(0,200,255,0.15);
-  transition: all 0.3s ease;
-}
-.trackip-section:hover {
-  transform: scale(1.03);
-  box-shadow: 0 0 28px rgba(0,200,255,0.25);
-}
-.trackip-section h3 {
-  color: #00e0ff;
-  margin-bottom: 10px;
-}
-.trackip-section p {
-  color: #b0e6ff;
-  font-size: 0.95em;
-  margin-bottom: 16px;
-}
-.trackip-btn {
-  background: linear-gradient(90deg, #00d0ff, #006aff);
-  border: none;
-  color: white;
-  padding: 10px 22px;
-  border-radius: 10px;
-  font-weight: bold;
-  cursor: pointer;
-  transition: 0.3s;
-}
-.trackip-btn:hover {
-  transform: scale(1.05);
-  box-shadow: 0 0 20px #00d0ff;
-}
+        .login-redirect-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: var(--neon-cyan);
+            transition: left 0.5s ease;
+            z-index: -1;
+        }
 
-.logoRow {
-  margin-top: 30px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-.logo {
-  width: 90px;
-  height: 90px;
-  border-radius: 50%;
-  background: url('https://files.catbox.moe/rryzbu.jpg') center/cover;
-  border: 3px solid #00eaff;
-  box-shadow: 0 0 30px rgba(0,255,255,0.4);
-  animation: float 3s ease-in-out infinite;
-}
-@keyframes float {
-  0%,100% { transform: translateY(0); }
-  50% { transform: translateY(-8px); }
-}
-footer {
-  margin-top: 16px;
-  font-size: 0.85em;
-  color: #b5eaff;
-}
-</style>
+        .login-redirect-btn:hover::before {
+            left: 0;
+        }
+
+        .login-redirect-btn:hover {
+            color: var(--dark-bg);
+            box-shadow: 0 0 30px var(--neon-cyan);
+            transform: translateY(-3px);
+        }
+
+        /* Matrix Rain Effect */
+        .matrix-rain {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+            opacity: 0.1;
+        }
+
+        .matrix-column {
+            position: absolute;
+            top: -100px;
+            font-family: monospace;
+            font-size: 20px;
+            color: var(--neon-cyan);
+            animation: matrix-fall linear infinite;
+        }
+
+        @keyframes matrix-fall {
+            to {
+                transform: translateY(calc(100vh + 100px));
+            }
+        }
+
+        /* Main Content (when logged in) */
+        .main-content {
+            display: none;
+            min-height: 100vh;
+            position: relative;
+        }
+
+        /* Animated Background */
+        .bg-animation {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: -2;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(120, 119, 198, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(255, 119, 198, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 40% 20%, rgba(255, 219, 98, 0.3) 0%, transparent 50%),
+                linear-gradient(45deg, #0a0a0f, #1a0033, #0f0f23);
+            background-size: 400% 400%;
+            animation: gradientShift 20s ease infinite;
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Cyber Grid */
+        .cyber-grid {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(0, 255, 255, 0.1) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 255, 255, 0.1) 1px, transparent 1px);
+            background-size: 50px 50px;
+            z-index: -1;
+            animation: grid-move 10s linear infinite;
+        }
+
+        @keyframes grid-move {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(50px, 50px); }
+        }
+
+        /* Advanced Particles */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            border-radius: 50%;
+            animation: float 25s infinite linear;
+        }
+
+        @keyframes float {
+            from {
+                transform: translateY(100vh) translateX(0) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            to {
+                transform: translateY(-100vh) translateX(200px) rotate(720deg);
+                opacity: 0;
+            }
+        }
+
+        /* Navigation Header */
+        .navbar-custom {
+            background: rgba(10, 10, 15, 0.8);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(0, 255, 255, 0.3);
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            animation: slideDown 0.5s ease-out;
+        }
+
+        @keyframes slideDown {
+            from {
+                transform: translateY(-100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .brand-logo {
+            font-size: 1.8rem;
+            font-weight: 900;
+            background: var(--neon-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            color: var(--text-primary);
+        }
+
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: 2px solid var(--neon-cyan);
+            padding: 2px;
+            background: var(--neon-gradient);
+        }
+
+        .user-avatar img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        /* Main Container */
+        .main-container {
+            padding: 40px 20px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        /* Dashboard Cards */
+        .dashboard-header {
+            text-align: center;
+            margin-bottom: 50px;
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .dashboard-title {
+            font-size: 3rem;
+            font-weight: 900;
+            background: var(--neon-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 5px;
+        }
+
+        .dashboard-subtitle {
+            color: var(--text-secondary);
+            font-size: 1.2rem;
+            letter-spacing: 2px;
+        }
+
+        /* Stats Cards */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            margin-bottom: 50px;
+        }
+
+        .stat-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(0, 255, 255, 0.2);
+            border-radius: 20px;
+            padding: 30px;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            animation: fadeInUp 0.8s ease-out backwards;
+        }
+
+        .stat-card:nth-child(1) { animation-delay: 0.1s; }
+        .stat-card:nth-child(2) { animation-delay: 0.2s; }
+        .stat-card:nth-child(3) { animation-delay: 0.3s; }
+        .stat-card:nth-child(4) { animation-delay: 0.4s; }
+
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: var(--neon-gradient);
+            border-radius: 20px;
+            z-index: -1;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .stat-card:hover::before {
+            opacity: 0.5;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(0, 255, 255, 0.3);
+        }
+
+        .stat-icon {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            background: var(--neon-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .stat-value {
+            font-size: 2.5rem;
+            font-weight: 900;
+            color: var(--neon-cyan);
+            margin-bottom: 5px;
+        }
+
+        .stat-label {
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 0.9rem;
+        }
+
+        /* Mission Section */
+        .mission-section {
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(0, 255, 255, 0.2);
+            border-radius: 30px;
+            padding: 40px;
+            margin-bottom: 40px;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            font-weight: 800;
+            text-align: center;
+            margin-bottom: 40px;
+            background: var(--neon-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+        }
+
+        .mission-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+
+        .mission-card {
+            background: linear-gradient(135deg, rgba(0, 255, 255, 0.1), rgba(255, 0, 255, 0.1));
+            border: 2px solid transparent;
+            border-radius: 20px;
+            padding: 30px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .mission-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .mission-card:hover::before {
+            left: 100%;
+        }
+
+        .mission-card:hover {
+            transform: translateY(-10px) rotateX(5deg);
+            box-shadow: 0 20px 40px rgba(255, 0, 255, 0.4);
+            border-color: var(--neon-pink);
+        }
+
+        .mission-card.selected {
+            background: linear-gradient(135deg, rgba(0, 255, 255, 0.3), rgba(255, 0, 255, 0.3));
+            border-color: var(--neon-cyan);
+            box-shadow: 0 0 30px rgba(0, 255, 255, 0.5);
+        }
+
+        .mission-icon {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            filter: drop-shadow(0 0 10px currentColor);
+        }
+
+        .mission-name {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: var(--text-primary);
+        }
+
+        .mission-desc {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        /* Referral Section */
+        .referral-section {
+            background: linear-gradient(135deg, rgba(255, 215, 0, 0.1), rgba(255, 140, 0, 0.1));
+            border: 2px solid rgba(255, 215, 0, 0.3);
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 30px;
+        }
+
+        .referral-link-container {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .referral-link {
+            flex: 1;
+            min-width: 250px;
+            background: rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(255, 215, 0, 0.3);
+            border-radius: 10px;
+            padding: 15px;
+            color: var(--neon-yellow);
+            font-family: monospace;
+            font-size: 0.9rem;
+            word-break: break-all;
+        }
+
+        .copy-btn {
+            background: var(--neon-gradient);
+            border: none;
+            border-radius: 10px;
+            padding: 15px 30px;
+            color: white;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .copy-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 30px rgba(255, 215, 0, 0.5);
+        }
+
+        /* Action Buttons */
+        .action-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn-action {
+            background: var(--neon-gradient);
+            border: none;
+            border-radius: 50px;
+            padding: 15px 40px;
+            color: white;
+            font-weight: 700;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-action::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+
+        .btn-action:hover::before {
+            width: 400px;
+            height: 400px;
+        }
+
+        .btn-action:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(255, 0, 255, 0.5);
+        }
+
+        /* Modal Styles */
+        .modal-content {
+            background: linear-gradient(135deg, #1a0033, #0a0a0f);
+            border: 2px solid var(--neon-cyan);
+            border-radius: 20px;
+        }
+
+        .modal-header {
+            border-bottom: 1px solid rgba(0, 255, 255, 0.3);
+        }
+
+        .modal-footer {
+            border-top: 1px solid rgba(0, 255, 255, 0.3);
+        }
+
+        .modal-title {
+            color: var(--neon-cyan);
+            font-weight: 700;
+        }
+
+        .btn-close {
+            filter: invert(1);
+        }
+
+        /* Success Animation */
+        .success-animation {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 9999;
+            text-align: center;
+        }
+
+        .success-icon {
+            width: 150px;
+            height: 150px;
+            background: var(--neon-gradient);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            animation: successPulse 0.6s ease;
+            box-shadow: 0 0 50px rgba(0, 255, 255, 0.8);
+        }
+
+        @keyframes successPulse {
+            0% {
+                transform: scale(0);
+                opacity: 0;
+            }
+            50% {
+                transform: scale(1.3);
+            }
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        .success-message {
+            font-size: 2rem;
+            font-weight: 900;
+            background: var(--neon-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        /* Toast Notifications */
+        .toast-container {
+            position: fixed;
+            top: 100px;
+            right: 20px;
+            z-index: 9999;
+        }
+
+        .custom-toast {
+            background: linear-gradient(135deg, rgba(0, 0, 0, 0.9), rgba(26, 0, 51, 0.9));
+            border: 1px solid var(--neon-cyan);
+            border-radius: 15px;
+            padding: 20px;
+            color: white;
+            margin-bottom: 15px;
+            animation: slideInRight 0.5s ease;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            min-width: 300px;
+            box-shadow: 0 10px 30px rgba(0, 255, 255, 0.3);
+        }
+
+        @keyframes slideInRight {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        .toast-icon {
+            font-size: 1.5rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .denied-title {
+                font-size: 3rem;
+            }
+            
+            .dashboard-title {
+                font-size: 2rem;
+            }
+            
+            .mission-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Loading Animation */
+        .loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: rgba(10, 10, 15, 0.95);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 10000;
+        }
+
+        .loading-spinner {
+            width: 80px;
+            height: 80px;
+            border: 4px solid rgba(0, 255, 255, 0.2);
+            border-top-color: var(--neon-cyan);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+    </style>
 </head>
 <body>
-  <main>
-    <h1>Olá, seja bem-vindo(a) ao site GusOfcXD</h1>
-    <p class="lead">Escolha uma função abaixo para começar sua experiência.</p>
-
-    <div class="features">
-      <div class="card">
-        <h3>Play Music</h3>
-        <div class="small">Encontre e reproduza suas músicas favoritas.</div>
-        <button class="btn" id="goPlay">Play Music</button>
-      </div>
-
-      <div class="card">
-        <h3>📱 iPhone Quoted</h3>
-        <div class="small">Click ini untuk ke halaman iPhone Quoted Generator.</div>
-        <button class="btn" id="goQuoted">iPhone Quoted</button>
-      </div>
-
-      <div class="trackip-section">
-        <h3>🌐 Track IP</h3>
-        <p>Para rastrear um endereço IP, clique no botão abaixo para acessar a página.</p>
-        <button id="trackIPBtn" class="trackip-btn">Acessar Track IP</button>
-      </div>
-
-      <div class="card">
-        <h3>Contact</h3>
-        <div class="small">Fale com o administrador @gofcc404</div>
-        <button class="btn" id="contactBtn">Chat Admin</button>
-      </div>
-
-      <div class="card">
-        <h3>Info</h3>
-        <div class="small">Criado por GusOfcXD 404 — projeto simples e funcional.</div>
-      </div>
+    <!-- Access Denied Screen -->
+    <div class="access-denied" id="accessDenied">
+        <div class="matrix-rain" id="matrixRain"></div>
+        <div class="denied-content">
+            <h1 class="denied-title">ACCESS DENIED</h1>
+            <p class="denied-subtitle">Anda harus login dulu</p>
+            <button class="login-redirect-btn" onclick="redirectToLogin()">
+                <i class="fas fa-sign-in-alt me-2"></i>Login Sekarang
+            </button>
+        </div>
     </div>
 
-    <div class="logoRow">
-      <div class="logo"></div>
-      <footer>GusOfcXD 404</footer>
+    <!-- Loading Overlay -->
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="loading-spinner"></div>
     </div>
-  </main>
 
-<script>
-document.getElementById('goPlay').addEventListener('click', ()=> {
-  window.location.href = 'playmusic.html';
-});
+    <!-- Main Content (Hidden until login check) -->
+    <div class="main-content" id="mainContent">
+        <div class="bg-animation"></div>
+        <div class="cyber-grid"></div>
+        <div class="particles" id="particles"></div>
 
-document.getElementById('contactBtn').addEventListener('click', ()=> {
-  window.open('https://t.me/gofcc404','_blank');
-});
+        <!-- Navigation -->
+        <nav class="navbar-custom">
+            <div class="container-fluid px-4">
+                <div class="d-flex justify-content-between align-items-center w-100">
+                    <div class="brand-logo">
+                        <i class="fas fa-rocket me-2"></i>GusOfcXD 404
+                    </div>
+                    <div class="user-info">
+                        <span id="welcomeUser">Welcome</span>
+                        <div class="user-avatar">
+                            <img src="https://files.catbox.moe/m9faxf.jpg" alt="User">
+                        </div>
+                        <button class="btn btn-sm btn-outline-danger" onclick="logout()">
+                            <i class="fas fa-sign-out-alt"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </nav>
 
-document.getElementById('trackIPBtn').addEventListener('click', ()=> {
-  const ok = confirm('Deseja acessar essa funcionalidade?');
-  if (ok) window.location.href = 'trackip.html';
-});
+        <!-- Main Container -->
+        <div class="main-container">
+            <!-- Dashboard Header -->
+            <div class="dashboard-header">
+                <h1 class="dashboard-title">Mission Portal</h1>
+                <p class="dashboard-subtitle">Complete missions & earn rewards</p>
+            </div>
 
-document.getElementById('goQuoted').addEventListener('click', ()=> {
-  const ok = confirm('Buka halaman iPhone Quoted Generator?');
-  if (ok) window.location.href = 'ipqt.html';
-});
-</script>
+            <!-- Stats Grid -->
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-coins"></i>
+                    </div>
+                    <div class="stat-value" id="userPoints">0</div>
+                    <div class="stat-label">Total Points</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-trophy"></i>
+                    </div>
+                    <div class="stat-value" id="missionsCompleted">0</div>
+                    <div class="stat-label">Missions Done</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <div class="stat-value" id="referralCount">0</div>
+                    <div class="stat-label">Referrals</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-gift"></i>
+                    </div>
+                    <div class="stat-value" id="rewardsClaimed">0</div>
+                    <div class="stat-label">Rewards Claimed</div>
+                </div>
+            </div>
+
+            <!-- Mission Section -->
+            <div class="mission-section">
+                <h2 class="section-title">
+                    <i class="fas fa-tasks me-2"></i>Select Your Mission
+                </h2>
+                
+                <div class="mission-grid">
+                    <div class="mission-card" onclick="selectMission('uang')">
+                        <div class="mission-icon">💰</div>
+                        <div class="mission-name">Money Mission</div>
+                        <div class="mission-desc">Get real cash rewards</div>
+                    </div>
+                    <div class="mission-card" onclick="selectMission('html')">
+                        <div class="mission-icon">📄</div>
+                        <div class="mission-name">HTML Mission</div>
+                        <div class="mission-desc">Get exclusive HTML files</div>
+                    </div>
+                    <div class="mission-card" onclick="selectMission('ddos')">
+                        <div class="mission-icon">⚡</div>
+                        <div class="mission-name">DDOS Mission</div>
+                        <div class="mission-desc">Get powerful DDOS tools</div>
+                    </div>
+                    <div class="mission-card" onclick="selectMission('telegram')">
+                        <div class="mission-icon">💬</div>
+                        <div class="mission-name">Telegram Mission</div>
+                        <div class="mission-desc">Get premium accounts</div>
+                    </div>
+                </div>
+
+                <!-- Referral Section -->
+                <div class="referral-section">
+                    <h4 class="mb-3">
+                        <i class="fas fa-link me-2"></i>Your Referral Link
+                    </h4>
+                    <div class="referral-link-container">
+                        <div class="referral-link" id="referralLink">https://gusofcxd.vercel.app/login?ref=129203</div>
+                        <button class="copy-btn" onclick="copyReferral()">
+                            <i class="fas fa-copy me-2"></i>Copy
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="action-buttons">
+                    <button class="btn-action" onclick="claimReward()">
+                        <i class="fas fa-gift me-2"></i>Claim Reward
+                    </button>
+                    <button class="btn-action" onclick="shareReferral()">
+                        <i class="fas fa-share-alt me-2"></i>Share Referral
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Success Animation -->
+    <div class="success-animation" id="successAnimation">
+        <div class="success-icon">
+            <i class="fas fa-check fa-4x text-white"></i>
+        </div>
+        <div class="success-message" id="successMessage">Success!</div>
+    </div>
+
+    <!-- Toast Container -->
+    <div class="toast-container" id="toastContainer"></div>
+
+    <!-- Reward Modal -->
+    <div class="modal fade" id="rewardModal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Claim Your Reward</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body" id="rewardModalBody">
+                    <!-- Dynamic content -->
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="confirmReward">Confirm</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Global variables
+        let selectedMission = null;
+        let userPoints = 0;
+        let username = '';
+
+        // Check login status on page load
+        window.addEventListener('DOMContentLoaded', function() {
+            checkLoginStatus();
+            createMatrixRain();
+            createParticles();
+        });
+
+        // Create Matrix Rain Effect
+        function createMatrixRain() {
+            const matrixRain = document.getElementById('matrixRain');
+            const columns = Math.floor(window.innerWidth / 30);
+            
+            for (let i = 0; i < columns; i++) {
+                const column = document.createElement('div');
+                column.className = 'matrix-column';
+                column.style.left = i * 30 + 'px';
+                column.style.animationDuration = (Math.random() * 5 + 5) + 's';
+                column.style.animationDelay = Math.random() * 5 + 's';
+                
+                let text = '';
+                for (let j = 0; j < 30; j++) {
+                    text += Math.random() > 0.5 ? '1' : '0';
+                    text += '<br>';
+                }
+                column.innerHTML = text;
+                matrixRain.appendChild(column);
+            }
+        }
+
+        // Create Advanced Particles
+        function createParticles() {
+            const particlesContainer = document.getElementById('particles');
+            const colors = ['#00ffff', '#ff00ff', '#ffff00', '#00ff00', '#ff0080'];
+            
+            for (let i = 0; i < 100; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.background = colors[Math.floor(Math.random() * colors.length)];
+                particle.style.boxShadow = `0 0 10px ${particle.style.background}`;
+                particle.style.animationDelay = Math.random() * 25 + 's';
+                particle.style.animationDuration = (20 + Math.random() * 10) + 's';
+                particlesContainer.appendChild(particle);
+            }
+        }
+
+        // Check Login Status
+        function checkLoginStatus() {
+            const isLoggedIn = sessionStorage.getItem('isLoggedIn');
+            
+            if (isLoggedIn === 'true') {
+                username = sessionStorage.getItem('username') || 'User';
+                userPoints = parseInt(sessionStorage.getItem('userPoints')) || 0;
+                
+                // Show main content
+                document.getElementById('accessDenied').style.display = 'none';
+                document.getElementById('mainContent').style.display = 'block';
+                
+                // Update user info
+                document.getElementById('welcomeUser').textContent = `Welcome, ${username}`;
+                document.getElementById('userPoints').textContent = userPoints;
+                
+                // Generate referral link
+                const referralCode = Math.floor(Math.random() * 900000) + 100000;
+                document.getElementById('referralLink').textContent = `https://gusofcxd.vercel.app/login?ref=${referralCode}`;
+                
+                // Show welcome toast
+                setTimeout(() => {
+                    showToast(`Welcome back, ${username}!`, 'success');
+                }, 1000);
+            } else {
+                // Show access denied
+                document.getElementById('accessDenied').style.display = 'flex';
+                document.getElementById('mainContent').style.display = 'none';
+            }
+        }
+
+        // Redirect to Login
+        function redirectToLogin() {
+            showLoading();
+            setTimeout(() => {
+                window.location.href = 'login.html';
+            }, 1000);
+        }
+
+        // Logout
+        function logout() {
+            sessionStorage.clear();
+            showLoading();
+            setTimeout(() => {
+                window.location.href = 'login.html';
+            }, 1000);
+        }
+
+        // Show Loading
+        function showLoading() {
+            document.getElementById('loadingOverlay').style.display = 'flex';
+        }
+
+        // Hide Loading
+        function hideLoading() {
+            document.getElementById('loadingOverlay').style.display = 'none';
+        }
+
+        // Show Toast Notification
+        function showToast(message, type = 'info') {
+            const toastContainer = document.getElementById('toastContainer');
+            const toast = document.createElement('div');
+            toast.className = 'custom-toast';
+            
+            let icon = 'fa-info-circle';
+            let iconColor = '#00ffff';
+            if (type === 'success') {
+                icon = 'fa-check-circle';
+                iconColor = '#00ff00';
+            }
+            if (type === 'error') {
+                icon = 'fa-exclamation-circle';
+                iconColor = '#ff0000';
+            }
+            if (type === 'warning') {
+                icon = 'fa-exclamation-triangle';
+                iconColor = '#ffff00';
+            }
+            
+            toast.innerHTML = `
+                <div class="toast-icon" style="color: ${iconColor}">
+                    <i class="fas ${icon}"></i>
+                </div>
+                <span>${message}</span>
+            `;
+            
+            toastContainer.appendChild(toast);
+            
+            setTimeout(() => {
+                toast.style.animation = 'slideInRight 0.5s ease reverse';
+                setTimeout(() => toast.remove(), 500);
+            }, 4000);
+        }
+
+        // Select Mission
+        function selectMission(mission) {
+            // Remove previous selection
+            document.querySelectorAll('.mission-card').forEach(card => {
+                card.classList.remove('selected');
+            });
+            
+            // Add selection to clicked mission
+            event.currentTarget.classList.add('selected');
+            selectedMission = mission;
+            
+            showToast(`Mission ${mission} selected!`, 'info');
+        }
+
+        // Copy Referral
+        function copyReferral() {
+            const referralLink = document.getElementById('referralLink').textContent;
+            navigator.clipboard.writeText(referralLink).then(() => {
+                showToast('Referral link copied!', 'success');
+            });
+        }
+
+        // Share Referral
+        function shareReferral() {
+            const referralLink = document.getElementById('referralLink').textContent;
+            
+            if (navigator.share) {
+                navigator.share({
+                    title: 'Join GusOfcXD 404',
+                    text: 'Join me and complete missions to earn rewards!',
+                    url: referralLink
+                });
+            } else {
+                copyReferral();
+            }
+        }
+
+        // Claim Reward
+        function claimReward() {
+            if (!selectedMission) {
+                showToast('Please select a mission first!', 'warning');
+                return;
+            }
+            
+            if (userPoints < 100) {
+                showToast('You need at least 100 points to claim rewards!', 'error');
+                return;
+            }
+            
+            const modal = new bootstrap.Modal(document.getElementById('rewardModal'));
+            const modalBody = document.getElementById('rewardModalBody');
+            
+            switch(selectedMission) {
+                case 'uang':
+                    modalBody.innerHTML = `
+                        <div class="mb-3">
+                            <label class="form-label text-light">Enter your Dana number</label>
+                            <input type="text" class="form-control bg-dark text-light border-secondary" id="danaNumber" placeholder="08xx-xxxx-xxxx">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label text-light">Select amount</label>
+                            <div class="d-grid gap-2">
+                                <button class="btn btn-outline-light" onclick="selectAmount(2000)">Rp 2.000</button>
+                                <button class="btn btn-outline-light" onclick="selectAmount(1000)">Rp 1.000</button>
+                            </div>
+                            <small class="text-secondary mt-2 d-block">Choose based on your points</small>
+                        </div>
+                    `;
+                    break;
+                    
+                case 'html':
+                    modalBody.innerHTML = `
+                        <div class="text-center">
+                            <i class="fas fa-file-code fa-5x mb-3 text-primary"></i>
+                            <h5 class="text-light">HTML File Ready</h5>
+                            <p class="text-secondary">Here's your HTML file</p>
+                            <button class="btn btn-primary btn-lg" onclick="downloadFile('html')">
+                                <i class="fas fa-download me-2"></i>Download index.html
+                            </button>
+                        </div>
+                    `;
+                    break;
+                    
+                case 'ddos':
+                    modalBody.innerHTML = `
+                        <div class="text-center">
+                            <i class="fas fa-bolt fa-5x mb-3 text-warning"></i>
+                            <h5 class="text-light">DDOS Tools Ready</h5>
+                            <p class="text-secondary">ddos.zip file will be sent</p>
+                            <button class="btn btn-warning btn-lg" onclick="downloadFile('ddos')">
+                                <i class="fas fa-download me-2"></i>Download ddos.zip
+                            </button>
+                        </div>
+                    `;
+                    break;
+                    
+                case 'telegram':
+                    modalBody.innerHTML = `
+                        <div class="text-center">
+                            <i class="fab fa-telegram fa-5x mb-3 text-info"></i>
+                            <h5 class="text-light">Contact Admin</h5>
+                            <p class="text-secondary">Chat telegram "goffc404" to get your reward</p>
+                            <a href="https://t.me/goffc404" target="_blank" class="btn btn-info btn-lg">
+                                <i class="fab fa-telegram me-2"></i>Open Telegram
+                            </a>
+                        </div>
+                    `;
+                    break;
+            }
+            
+            modal.show();
+        }
+
+        // Select Amount for Money Reward
+        function selectAmount(amount) {
+            document.getElementById('confirmReward').onclick = function() {
+                const danaNumber = document.getElementById('danaNumber').value;
+                if (!danaNumber) {
+                    showToast('Please enter your Dana number!', 'error');
+                    return;
+                }
+                
+                // Send to Telegram bot
+                const message = `Money Request:\nNumber: ${danaNumber}\nAmount: Rp ${amount}`;
+                sendToTelegram(message);
+                
+                // Show success
+                showSuccess(`Money reward Rp ${amount} will be processed!`);
+                bootstrap.Modal.getInstance(document.getElementById('rewardModal')).hide();
+                
+                // Update stats
+                updateStats();
+            };
+        }
+
+        // Download File
+        function downloadFile(type) {
+            if (type === 'html') {
+                const htmlContent = `<!DOCTYPE html>
+<html>
+<head>
+    <title>Reward HTML File</title>
+    <style>
+        body { font-family: Arial; text-align: center; padding: 50px; }
+        h1 { color: #667eea; }
+    </style>
+</head>
+<body>
+    <h1>Congratulations! 🎉</h1>
+    <p>This is your reward HTML file from GusOfcXD 404</p>
+    <p>Thank you for completing the mission!</p>
+</body>
+</html>`;
+                
+                const blob = new Blob([htmlContent], { type: 'text/html' });
+                const url = window.URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = 'index.html';
+                a.click();
+                
+                showToast('HTML file downloaded successfully!', 'success');
+            } else if (type === 'ddos') {
+                showToast('DDOS.zip is being prepared...', 'info');
+                setTimeout(() => {
+                    showToast('DDOS.zip downloaded successfully!', 'success');
+                }, 2000);
+            }
+            
+            bootstrap.Modal.getInstance(document.getElementById('rewardModal')).hide();
+            showSuccess('Reward claimed successfully!');
+            updateStats();
+        }
+
+        // Send to Telegram
+        function sendToTelegram(message) {
+            const botToken = '8261709007:AAG53HpN7-tpzzJXzOpmtp5fG-6QGEGFXYA';
+            const chatId = '8365005950';
+            
+            // In real implementation, send to your bot
+            console.log('Sending to Telegram:', message);
+            showToast('Request sent to admin!', 'success');
+        }
+
+        // Show Success Animation
+        function showSuccess(message) {
+            const successAnimation = document.getElementById('successAnimation');
+            document.getElementById('successMessage').textContent = message;
+            successAnimation.style.display = 'block';
+            
+            setTimeout(() => {
+                successAnimation.style.display = 'none';
+            }, 3000);
+        }
+
+        // Update Stats
+        function updateStats() {
+            const missions = parseInt(document.getElementById('missionsCompleted').textContent);
+            const rewards = parseInt(document.getElementById('rewardsClaimed').textContent);
+            
+            document.getElementById('missionsCompleted').textContent = missions + 1;
+            document.getElementById('rewardsClaimed').textContent = rewards + 1;
+            
+            // Update points
+            userPoints -= 100;
+            document.getElementById('userPoints').textContent = userPoints;
+            sessionStorage.setItem('userPoints', userPoints);
+        }
+
+        // Add keyboard shortcuts
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                // Close any open modal
+                const modal = bootstrap.Modal.getInstance(document.querySelector('.modal.show'));
+                if (modal) modal.hide();
+            }
+        });
+
+        // Add some interactive effects
+        document.addEventListener('mousemove', function(e) {
+            const cards = document.querySelectorAll('.stat-card, .mission-card');
+            const x = e.clientX / window.innerWidth;
+            const y = e.clientY / window.innerHeight;
+            
+            cards.forEach(card => {
+                const rect = card.getBoundingClientRect();
+                const cardX = rect.left + rect.width / 2;
+                const cardY = rect.top + rect.height / 2;
+                const angleX = (e.clientY - cardY) * 0.01;
+                const angleY = (e.clientX - cardX) * -0.01;
+                
+                card.style.transform = `perspective(1000px) rotateX(${angleX}deg) rotateY(${angleY}deg)`;
+            });
+        });
+    </script>
 </body>
 </html>
